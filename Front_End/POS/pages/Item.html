@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Management</title>
+    <link rel="stylesheet" href="../css/item.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo">POS System</div>
+    <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a class="active" href="Customer.html">Customer</a>
+        <a href="Item.html">Item</a>
+        <a href="Order.html">Order</a>
+    </div>
+</nav>
+
+<main class="container">
+
+    <h1>Item Management</h1>
+
+    <div class="card">
+        <h2>Item Details</h2>
+
+        <form class="form">
+            <input type="text" id="iid" placeholder="Item ID">
+            <input type="text" id="iName" placeholder="Item Name">
+            <input type="text" id="qty" placeholder="Qty">
+            <input type="text" id="price" placeholder="Price">
+        </form>
+
+        <div class="actions">
+            <button class="btn primary" onclick="saveItem()">Save</button>
+            <button class="btn warning" onclick="updateItem()">Update</button>
+            <button class="btn danger" onclick="deleteItem()">Delete</button>
+        </div>
+
+        <table id="item-table">
+            <thead>
+            <tr>
+                <th>Item ID</th>
+                <th>Item Name</th>
+                <th>Qty</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody id="item-list"></tbody>
+        </table>
+    </div>
+
+</main>
+
+<script src="../jquery-3.7.1.min.js"></script>
+<script src="../js/item.js"></script>
+</body>
+</html>

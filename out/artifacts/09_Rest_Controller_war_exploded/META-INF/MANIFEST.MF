@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: Pasindu Madushan
+Build-Jdk: GraalVM 24.0.2 - VM 24.2.2
+
