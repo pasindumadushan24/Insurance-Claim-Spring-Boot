@@ -218,6 +218,7 @@ function updateCustomer() {
 
             alert("Update Failed!");
 
+
         }
 
 
