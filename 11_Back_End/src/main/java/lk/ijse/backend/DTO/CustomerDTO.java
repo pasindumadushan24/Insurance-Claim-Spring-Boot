@@ -20,4 +20,5 @@ public class CustomerDTO {
     @Size(min = 10, message = "Address must be at least 5 characters long")
     private String address;
 
+
 }
