@@ -1,152 +1,107 @@
-const customerUrl = "http://localhost:8080/api/v1/Customer";
-const itemUrl = "http://localhost:8080/api/v1/Item";
-const orderUrl = "http://localhost:8080/api/v1/Order";
+let allItems = []; // සියලුම items තබා ගැනීමට
 
-let itemsCache = [];
-
-$(function () {
-    initOrderPage();
-});
-
-// ------------------ Initialization ------------------
-function initOrderPage() {
+$(document).ready(function () {
     loadCustomers();
     loadItems();
-    getAllOrders();
-    $("#order-item-list").empty();
-    $("#order-total").text("-");
-    $("#order-date").val("");
+    setNextOrderId();
+
+    // අද දිනය set කිරීම
+    $('#order-date').val(new Date().toISOString().split('T')[0]);
+});
+
+function setNextOrderId() {
+    $.get("http://localhost:8080/api/v1/Order/nextId", function (res) {
+        $('#order-id').text(res.data);
+    });
 }
 
-// ------------------ Load Customers ------------------
 function loadCustomers() {
-    $.get(customerUrl, function (response) {
-        const dropdown = $("#order-customer").empty();
-        dropdown.append("<option value=''>-- Select Customer --</option>");
-        response.forEach(c => dropdown.append(`<option value='${c.id}'>${c.name}</option>`));
+    $.get("http://localhost:8080/api/v1/Customer", function (res) {
+        let s = $('#order-customer');
+        s.empty().append('<option value="">Select Customer</option>');
+        res.data.forEach(c => s.append(`<option value="${c.cid}">${c.name}</option>`));
     });
 }
 
-// ------------------ Load Items ------------------
 function loadItems() {
-    $.get(itemUrl, function (response) {
-        itemsCache = response; // cache all items for dropdown & price display
+    $.get("http://localhost:8080/api/v1/Item", function (res) {
+        allItems = res.data;
     });
 }
 
-// ------------------ Load Order History ------------------
-function getAllOrders() {
-    $.get(orderUrl, function (orders) {
-        $('#order-history-list').empty();
-        orders.forEach(order => {
-            const row = `<tr>
-                <td>${order.id}</td>
-                <td>${order.customerId}</td>
-                <td>${order.date}</td>
-                <td>${order.total.toFixed(2)}</td>
-            </tr>`;
-            $('#order-history-list').append(row);
-        });
-        $("#order-id").text("ORD-" + (orders.length + 1));
-    });
-}
-
-// ------------------ Add Item Row ------------------
 function addItemRow() {
-    const options = itemsCache.map(i => `<option value="${i.id}" data-price="${i.price}">${i.name}</option>`).join("");
-    const itemDropdown = `<select class="item-row"><option value=''>-- Select Item --</option>${options}</select>`;
-    $("#order-item-list").append(
-        `<tr>
-            <td>${itemDropdown}</td>
-            <td class='price'>0.00</td>
-            <td><input type='number' class='qty' min='1' value='1'></td>
-            <td class='subtotal'>0.00</td>
-            <td><button onclick="deleteItemRow(this)">X</button></td>
-        </tr>`
-    );
+    let options = allItems.map(i => `<option value="${i.iid}">${i.iName}</option>`).join('');
+    let row = `
+        <tr>
+            <td><select class="item-select" onchange="updateRowPrice(this)">
+                <option value="">Select Item</option>${options}</select></td>
+            <td><input type="number" class="unit-price" readonly></td>
+            <td><input type="number" class="buy-qty" oninput="calculateSubTotal(this)" value="1"></td>
+            <td class="sub-total">0.00</td>
+            <td><button onclick="$(this).closest('tr').remove(); calculateTotal();">X</button></td>
+        </tr>`;
+    $('#order-item-list').append(row);
 }
 
-// ------------------ Item Selection ------------------
-$(document).on("change", ".item-row", function () {
-    const row = $(this).closest("tr");
-    const selected = $(this).find("option:selected");
-    const price = parseFloat(selected.data("price")) || 0;
-    row.find(".price").text(price.toFixed(2));
-    updateSubTotal(row);
-});
-
-// ------------------ Quantity Change ------------------
-$(document).on("input", ".qty", function () {
-    updateSubTotal($(this).closest("tr"));
-});
-
-// ------------------ Delete Row ------------------
-function deleteItemRow(btn) {
-    $(btn).closest("tr").remove();
-    updateGrandTotal();
+function updateRowPrice(element) {
+    let id = $(element).val();
+    let item = allItems.find(i => i.iid == id);
+    let row = $(element).closest('tr');
+    if (item) {
+        row.find('.unit-price').val(item.price);
+        calculateSubTotal(element);
+    }
 }
 
-// ------------------ Update Subtotal ------------------
-function updateSubTotal(row) {
-    const price = parseFloat(row.find(".price").text()) || 0;
-    const qty = parseInt(row.find(".qty").val()) || 0;
-    const subtotal = price * qty;
-    row.find(".subtotal").text(subtotal.toFixed(2));
-    updateGrandTotal();
+function calculateSubTotal(element) {
+    let row = $(element).closest('tr');
+    let price = parseFloat(row.find('.unit-price').val()) || 0;
+    let qty = parseInt(row.find('.buy-qty').val()) || 0;
+    row.find('.sub-total').text((price * qty).toFixed(2));
+    calculateTotal();
 }
 
-// ------------------ Update Grand Total ------------------
-function updateGrandTotal() {
+function calculateTotal() {
     let total = 0;
-    $("#order-item-list .subtotal").each(function () {
-        total += parseFloat($(this).text()) || 0;
+    $('.sub-total').each(function () {
+        total += parseFloat($(this).text());
     });
-    $("#order-total").text(total.toFixed(2));
+    $('#order-total').text(total.toFixed(2));
 }
 
-// ------------------ Clear Items ------------------
-function clearItems() {
-    initOrderPage();
-}
-
-// ------------------ Save Order ------------------
 function saveOrder() {
-    const customerId = $("#order-customer").val();
-    if (!customerId) return alert("Select a customer");
-
-    const date = $("#order-date").val();
-    if (!date) return alert("Enter a valid date");
-
-    const rows = $("#order-item-list tr");
-    if (rows.length === 0) return alert("Add at least one item");
-
-    const items = [];
-    rows.each(function () {
-        const itemId = $(this).find(".item-row").val();
-        const qty = parseInt($(this).find(".qty").val());
-        if (!itemId) return alert("Select a valid item");
-        items.push({ itemId, qty });
+    let orderDetails = [];
+    $('#order-item-list tr').each(function () {
+        let itemId = $(this).find('.item-select').val();
+        let qty = $(this).find('.buy-qty').val();
+        let price = $(this).find('.unit-price').val();
+        if (itemId) {
+            orderDetails.push({ itemId: itemId, qty: parseInt(qty), unitPrice: parseFloat(price) });
+        }
     });
 
-    const orderData = {
-        id: $("#order-id").text(),
-        customerId: customerId,
-        date: date,
-        items: items
+    let orderData = {
+        date: $('#order-date').val(),
+        customerId: $('#order-customer').val(),
+        orderDetails: orderDetails
     };
 
+    if (!orderData.customerId || orderDetails.length === 0) {
+        alert("Please select customer and items!");
+        return;
+    }
+
     $.ajax({
-        url: orderUrl,
-        method: 'POST',
-        contentType: 'application/json',
+        method: "POST",
+        url: "http://localhost:8080/api/v1/Order",
+        contentType: "application/json",
         data: JSON.stringify(orderData),
         success: function () {
-            alert("Order placed successfully!");
-            initOrderPage();
+            alert("Order Placed Successfully!");
+            location.reload();
         },
-        error: function (err) {
-            alert(err.responseJSON?.message || "Order failed!");
-            console.log(err);
+        error: function (xhr) {
+            alert("Error: " + xhr.responseJSON.message);
         }
     });
 }

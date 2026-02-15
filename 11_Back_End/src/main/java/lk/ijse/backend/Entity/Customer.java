@@ -22,5 +22,5 @@ public class Customer {
     private String address;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Order> orders; // Variable name eka plural (bahuwachana) kirima hodayi
+    private List<Orders> orders; // Variable name eka plural (bahuwachana) kirima hodayi
 }
