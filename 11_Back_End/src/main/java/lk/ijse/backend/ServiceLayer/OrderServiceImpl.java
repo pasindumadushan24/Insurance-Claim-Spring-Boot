@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyle.detailsList;
 
 @Service
 @Transactional
@@ -27,42 +26,11 @@ public class OrderServiceImpl implements OrderService {
     private final CustomerRepository customerRepository;
     private final ItemRepository itemRepository;
 
-//    @Override
-//    public void placeOrder(OrderDTO orderDTO) {
-//        Customer customer = customerRepository.findById(orderDTO.getCustomerId())
-//                .orElseThrow(() -> new RuntimeException("Customer not found"));
-//
-//        Orders order = new Orders();
-//        order.setDate(orderDTO.getDate());
-//        order.setCustomer(customer);
-//
-//        List<OrderDetail> details = new ArrayList<>();
-//        for (OrderDetailDTO dto : orderDTO.getOrderDetails()) {
-//            Item item = itemRepository.findById(dto.getItemId())
-//                    .orElseThrow(() -> new RuntimeException("Item not found: " + dto.getItemId()));
-//
-//            // Stock පරීක්ෂාව සහ අඩු කිරීම
-//            if (item.getQty() < dto.getQty()) {
-//                throw new RuntimeException("Insufficient stock for item: " + item.getIid());
-//            }
-//            item.setQty(item.getQty() - dto.getQty());
-//            itemRepository.save(item); // Item stock update කිරීම
-//
-//            OrderDetail detail = new OrderDetail();
-//            detail.setOrders(order); // Parent Order එක සම්බන්ධ කිරීම (මෙය වැදගත්!)
-//            detail.setItem(item);
-//            detail.setQty(dto.getQty());
-//            detail.setUnitPrice(dto.getUnitPrice());
-//
-////            detailsList.add(detail);
-//        }
-//    }
-
 @Override
 @Transactional
 public void placeOrder(OrderDTO orderDTO) {
     // 1. Customer සොයා ගැනීම
-    Customer customer = customerRepository.findById(orderDTO.getCustomerId())
+    Customer customer = customerRepository.findById(orderDTO.getCid())
             .orElseThrow(() -> new RuntimeException("Customer not found"));
 
     // 2. නව Order එකක් සෑදීම
@@ -74,8 +42,8 @@ public void placeOrder(OrderDTO orderDTO) {
 
     for (OrderDetailDTO dto : orderDTO.getOrderDetails()) {
         // 3. Item එක සොයා ගැනීම
-        Item item = itemRepository.findById(dto.getItemId())
-                .orElseThrow(() -> new RuntimeException("Item not found: " + dto.getItemId()));
+        Item item = itemRepository.findById(dto.getIid())
+                .orElseThrow(() -> new RuntimeException("Item not found: " + dto.getIid()));
 
         // 4. Stock පරීක්ෂාව
         if (item.getQty() < dto.getQty()) {
@@ -116,7 +84,7 @@ public void placeOrder(OrderDTO orderDTO) {
             OrderDTO dto = new OrderDTO();
             dto.setOid(o.getOid());
             dto.setDate(o.getDate());
-            dto.setCustomerId(o.getCustomer().getCid());
+            dto.setCid(o.getCustomer().getCid());
             // Details අවශ්‍ය නම් ඒවාද loop එකකින් එකතු කරන්න
             dtos.add(dto);
         }
