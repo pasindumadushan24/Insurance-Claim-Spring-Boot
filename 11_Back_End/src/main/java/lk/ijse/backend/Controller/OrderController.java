@@ -1,5 +1,6 @@
 package lk.ijse.backend.Controller;
 
+import lk.ijse.backend.DTO.CustomerDTO;
 import lk.ijse.backend.DTO.OrderDTO;
 import lk.ijse.backend.ServiceLayer.OrderService;
 import lk.ijse.backend.Utill.APIResponse;
@@ -26,10 +27,12 @@ public class OrderController {
         return new ResponseEntity<>(new APIResponse<>(201, "Order Placed", null), HttpStatus.CREATED);
     }
 
-//    @GetMapping("/all")
-//    public ResponseEntity<APIResponse<List<OrderDTO>>> getAllOrders() {
-//        return new ResponseEntity<>(new APIResponse<>(200, "Success", orderService.getAllOrders()), HttpStatus.OK);
-//    }
+    @GetMapping
+    public ResponseEntity<APIResponse<List<OrderDTO>>> getAllOrders() {
+        List<OrderDTO> orders = orderService.getAllOrders();
+
+        return new ResponseEntity<>(new APIResponse<>(200, "Customers retrieved successfully", orders), HttpStatus.OK);
+    }
 
 
     @GetMapping("/nextId")
