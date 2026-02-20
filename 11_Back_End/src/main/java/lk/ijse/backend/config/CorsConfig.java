@@ -9,8 +9,8 @@ public class CorsConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**") // Okkoma endpoints walata CORS allow karanawa
-                .allowedOrigins("http://localhost:63342") // IntelliJ built-in server eka
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:63342")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);

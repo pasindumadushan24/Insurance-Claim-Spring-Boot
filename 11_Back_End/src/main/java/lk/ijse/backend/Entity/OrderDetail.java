@@ -34,7 +34,7 @@ import lombok.*;
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long cid;
 
     @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "oid")

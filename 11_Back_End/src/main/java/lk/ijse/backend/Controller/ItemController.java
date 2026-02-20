@@ -14,20 +14,20 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/Item") // Slash එකක් මුලට එකතු කිරීම වඩාත් සුදුසුයි
+@RequestMapping("/api/v1/Item")
 public class ItemController {
 
     private final ItemService itemService;
     private final ItemRepository itemRepository;
 
-    // ===================== SAVE ITEM =====================
+
     // ===================== SAVE ITEM =====================
     @PostMapping
     public ResponseEntity<APIResponse<ItemDTO>> saveItem(@RequestBody ItemDTO itemDTO) {
-        // 1. කලින් තිබුණු 'ItemDTO saved =' කොටස ඉවත් කරන්න
+
         itemService.saveItem(itemDTO);
 
-        // 2. සේව් වුණු item එකම නැවත response එකට යවන්න (හෝ null යවන්න)
+
         return new ResponseEntity<>(
                 new APIResponse<>(201, "Item Saved Successfully", itemDTO),
                 HttpStatus.CREATED
@@ -58,7 +58,7 @@ public class ItemController {
     // ===================== GET NEXT ITEM ID =====================
     @GetMapping("/nextId")
     public ResponseEntity<APIResponse<String>> getNextId() {
-        // Repository එකේ findNextId() ලියලා තියෙන්න ඕනේ String එකක් return කරන විදියට
+
         String nextId = itemRepository.findNextId();
         return new ResponseEntity<>(new APIResponse<>(200, "Next ID fetched", nextId), HttpStatus.OK);
     }

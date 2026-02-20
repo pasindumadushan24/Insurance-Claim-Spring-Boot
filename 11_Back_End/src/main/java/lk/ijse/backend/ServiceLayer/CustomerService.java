@@ -8,7 +8,6 @@ public interface CustomerService {
     public CustomerDTO  saveCustomer(CustomerDTO customerDTO);
 
     public void updateCustomer(CustomerDTO customerDTO);
-//    public void deleteCustomer(Long cid);
 
     void deleteCustomer(Long cid);
 

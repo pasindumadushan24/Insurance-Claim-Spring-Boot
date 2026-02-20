@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Orders, Long> {
-    // Orders o ලෙස table එකේ alias එක නිවැරදිව පාවිච්චි කරන්න
+
     @Query("SELECT COALESCE(MAX(o.oid), 0) + 1 FROM Orders o")
     Long findNextId();
 }

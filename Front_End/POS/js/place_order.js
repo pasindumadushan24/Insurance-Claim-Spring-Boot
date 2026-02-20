@@ -1,11 +1,11 @@
-let allItems = []; // සියලුම items තබා ගැනීමට
+let allItems = [];
 
 $(document).ready(function () {
     loadCustomers();
     loadItems();
     setNextOrderId();
 
-    // අද දිනය set කිරීම
+
     $('#order-date').val(new Date().toISOString().split('T')[0]);
 });
 
@@ -72,21 +72,21 @@ function calculateTotal() {
 function saveOrder() {
     let orderDetails = [];
     $('#order-item-list tr').each(function () {
-        let itemId = $(this).find('.item-select').val();
+        let iid = $(this).find('.item-select').val();
         let qty = $(this).find('.buy-qty').val();
         let price = $(this).find('.unit-price').val();
-        if (itemId) {
-            orderDetails.push({ itemId: itemId, qty: parseInt(qty), unitPrice: parseFloat(price) });
+        if (iid) {
+            orderDetails.push({ iid: iid, qty: parseInt(qty), unitPrice: parseFloat(price) });
         }
     });
 
     let orderData = {
         date: $('#order-date').val(),
-        customerId: $('#order-customer').val(),
+        cid: $('#order-customer').val(),
         orderDetails: orderDetails
     };
 
-    if (!orderData.customerId || orderDetails.length === 0) {
+    if (!orderData.cid || orderDetails.length === 0) {
         alert("Please select customer and items!");
         return;
     }
@@ -105,3 +105,59 @@ function saveOrder() {
         }
     });
 }
+
+// ===================== GET ALL ORDERS =====================
+
+function getAllOrders() {
+
+    $.ajax({
+
+        method: "GET",
+
+        url: "http://localhost:8080/api/v1/Order",
+
+        success: function (response) {
+
+            let list = response.data;
+
+            let tbody = $('#order-history-list');
+
+            tbody.empty();
+
+            if (!list || list.length === 0) {
+                tbody.html('<tr><td colspan="3" style="text-align:center;">No Orders found in Database</td></tr>');
+                return;
+            }
+
+            let rows = '';
+
+            list.forEach(o => {
+
+                rows += `
+                <tr onclick="fillOrderForm('${o.oid}', '${o.date}', '${o.cid}')" style="cursor:pointer">
+                    <th>${o.oid}</th>
+                    <th>${o.date}</th>
+                    <th>${o.cid}</th>
+                    
+                </tr>
+                `;
+
+            });
+
+            tbody.html(rows);
+
+        },
+
+        error: function (xhr) {
+
+            console.error("AJAX Error:", xhr);
+            alert("Failed to load Orders!");
+
+        }
+
+    });
+
+}
+
+
+getAllOrders();

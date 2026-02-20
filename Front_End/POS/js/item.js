@@ -20,7 +20,7 @@ function getAllItems() {
 
             let rows = '';
             list.forEach(item => {
-                // Table row එක click කරද්දී fillForm එකට data යවනවා
+
                 rows += `<tr onclick="fillItemForm('${item.iid}', '${item.iName}', '${item.qty}', '${item.price}')" style="cursor:pointer">
                             <td>${item.iid}</td>
                             <td>${item.iName}</td>
@@ -52,7 +52,7 @@ function setNextItemId() {
 
 // ===================== SAVE ITEM =====================
 function saveItem() {
-    let iid = $('#iid').val(); // Auto-generated ID එක
+    let iid = $('#iid').val(); // Auto-generated ID
     let iName = $('#iName').val().trim();
     let qty = $('#qty').val().trim();
     let price = $('#price').val().trim();

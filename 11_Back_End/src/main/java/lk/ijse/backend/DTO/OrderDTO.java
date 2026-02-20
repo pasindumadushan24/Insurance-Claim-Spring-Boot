@@ -9,6 +9,7 @@ import java.util.List;
 public class OrderDTO {
     private Long oid;
     private String date;
-    private Long customerId;
+    private Long cid;
+
     private List<OrderDetailDTO> orderDetails;
 }

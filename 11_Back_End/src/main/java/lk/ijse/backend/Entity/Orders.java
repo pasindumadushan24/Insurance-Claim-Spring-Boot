@@ -1,5 +1,6 @@
 package lk.ijse.backend.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
@@ -28,7 +29,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "place_order") // "order" යනු SQL keyword එකක් බැවින් table name එක වෙනස් කරන්න
+@Table(name = "place_order")
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,12 +40,7 @@ public class Orders {
     @JoinColumn(name = "cid", referencedColumnName = "cid")
     private Customer customer;
 
-    // cascade = CascadeType.ALL දීම අනිවාර්යයි, එවිටයි OrderDetails ද save වෙන්නේ
-//    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<OrderDetail> orderDetails;
-
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<OrderDetail> orderDetails;
-
-
 }

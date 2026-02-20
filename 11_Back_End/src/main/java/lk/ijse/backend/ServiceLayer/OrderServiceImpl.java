@@ -29,11 +29,11 @@ public class OrderServiceImpl implements OrderService {
 @Override
 @Transactional
 public void placeOrder(OrderDTO orderDTO) {
-    // 1. Customer සොයා ගැනීම
+
     Customer customer = customerRepository.findById(orderDTO.getCid())
             .orElseThrow(() -> new RuntimeException("Customer not found"));
 
-    // 2. නව Order එකක් සෑදීම
+
     Orders order = new Orders();
     order.setDate(orderDTO.getDate());
     order.setCustomer(customer);
@@ -41,33 +41,33 @@ public void placeOrder(OrderDTO orderDTO) {
     List<OrderDetail> detailsList = new ArrayList<>();
 
     for (OrderDetailDTO dto : orderDTO.getOrderDetails()) {
-        // 3. Item එක සොයා ගැනීම
+
         Item item = itemRepository.findById(dto.getIid())
                 .orElseThrow(() -> new RuntimeException("Item not found: " + dto.getIid()));
 
-        // 4. Stock පරීක්ෂාව
+
         if (item.getQty() < dto.getQty()) {
             throw new RuntimeException("Insufficient stock for item: " + item.getIid());
         }
 
-        // 5. Stock අඩු කිරීම සහ Update කිරීම
+
         item.setQty(item.getQty() - dto.getQty());
         itemRepository.save(item);
 
-        // 6. Order Detail එක සෑදීම
+
         OrderDetail detail = new OrderDetail();
-        detail.setOrders(order); // Parent එක සම්බන්ධ කිරීම
+        detail.setOrders(order);
         detail.setItem(item);
         detail.setQty(dto.getQty());
         detail.setUnitPrice(dto.getUnitPrice());
 
-        detailsList.add(detail); // List එකට එකතු කිරීම
+        detailsList.add(detail);
     }
 
-    // 7. Order එකට Details List එක ඇතුළු කිරීම
+
     order.setOrderDetails(detailsList);
 
-    // 8. Order එක Save කිරීම (Cascade නිසා Details ද Save වේ)
+
     orderRepository.save(order);
 }
 
@@ -80,12 +80,12 @@ public void placeOrder(OrderDTO orderDTO) {
         List<OrderDTO> dtos = new ArrayList<>();
 
         for (Orders o : all) {
-            // මෙහිදී සරලව mapping එකක් සිදු කරන්න
+
             OrderDTO dto = new OrderDTO();
             dto.setOid(o.getOid());
             dto.setDate(o.getDate());
             dto.setCid(o.getCustomer().getCid());
-            // Details අවශ්‍ය නම් ඒවාද loop එකකින් එකතු කරන්න
+
             dtos.add(dto);
         }
         return dtos;

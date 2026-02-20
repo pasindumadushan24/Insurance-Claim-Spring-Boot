@@ -5,7 +5,6 @@
 
 import lk.ijse.backend.DTO.CustomerDTO;
 
-import lk.ijse.backend.Entity.Customer;
 
 import lk.ijse.backend.ServiceLayer.CustomerService;
 
@@ -21,13 +20,7 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
-
-
-import java.util.HashMap;
-
 import java.util.List;
-
-import java.util.Map;
 
 
 
@@ -49,39 +42,12 @@ public class CustomerController {
 
 
 
-// ===================== CREATE / SAVE CUSTOMER =====================
-
-// @PostMapping
-
-// public ResponseEntity<Map<String, Object>> saveCustomer(@RequestBody Customer customer) {
-
-// // Save to DB
-
-// Customer saved = customerRepository.save(customer);
-
-//
-
-// Map<String, Object> response = new HashMap<>();
-
-// response.put("data", saved);
-
-//
-
-// return ResponseEntity.ok(response);
-
-// }
-
-
-
-
-
-// CustomerController.java
 
     @PostMapping
 
     public ResponseEntity<APIResponse<CustomerDTO>> saveCustomer(@RequestBody CustomerDTO customerDTO) {
 
-// Service eka haraha save karanna
+
 
         CustomerDTO saved = customerService.saveCustomer(customerDTO);
 

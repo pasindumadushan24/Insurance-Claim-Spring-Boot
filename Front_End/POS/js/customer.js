@@ -40,7 +40,7 @@ function getAllCustomers() {
 
             list.forEach(c => {
 
-// String arguments pass කරන නිසා quotes ('') අනිවාර්යයි
+
 
                 rows += `<tr onclick="fillForm('${c.cid}', '${c.name}', '${c.address}')" style="cursor:pointer">
 
@@ -76,13 +76,13 @@ $(document).ready(function () {
 
     getAllCustomers();
 
-    setNextId(); // මුලින්ම පේජ් එක ලෝඩ් වෙද්දී ID එක ගන්න
+    setNextId();
 
 });
 
 
 
-// Next ID එක Backend එකෙන් අරන් Field එකට දාන Function එක
+
 
 function setNextId() {
 
@@ -94,7 +94,7 @@ function setNextId() {
 
         success: function (res) {
 
-            $('#cid').val(res.data); // Next ID එක field එකට සෙට් කරනවා
+            $('#cid').val(res.data);
 
         },
 
@@ -110,7 +110,7 @@ function setNextId() {
 
 
 
-// Update කරපු Save Function එක
+// Update Save Function
 
 function saveCustomer() {
 
@@ -146,11 +146,11 @@ function saveCustomer() {
 
 
 
-            clearFields(); // ඔක්කොම ක්ලියර් කරනවා
+            clearFields();
 
-            getAllCustomers(); // ටේබල් එක රිප්‍රෙෂ් කරනවා
+            getAllCustomers();
 
-            setNextId(); // ආයෙත් අලුත් Next ID එක අරන් ෆීල්ඩ් එකට දානවා
+            setNextId();
 
         },
 

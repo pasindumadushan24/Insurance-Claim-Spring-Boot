@@ -6,7 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class OrderDetailDTO {
-    private String itemId;
+    private String iid;
     private int qty;
     private double unitPrice;
 }

@@ -11,8 +11,6 @@ import lombok.Setter;
 
 public class ItemDTO {
 
-
-
     private String iid;
     private String iName;
     private int qty;
