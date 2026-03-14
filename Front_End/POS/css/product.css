@@ -112,3 +112,229 @@ nav ul li a {
 }
 
 .price
+
+
+    /* --- Products Page Full Responsive Styles --- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #f39c12;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.outer-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.main-container {
+    background: white;
+    width: 100%;
+    max-width: 1100px;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.logo {
+    font-weight: 900;
+    color: #f39c12;
+    font-size: 22px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #888;
+    font-weight: 700;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #f39c12;
+}
+
+/* Pricing Cards Layout */
+.pricing-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: stretch; /* Cards සියල්ල එකම උසකට ගැනීමට */
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.price-card {
+    background: #fffdf9;
+    border: 1px solid #feeeca;
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    flex: 1;
+    min-width: 280px; /* Cards ඉතා කුඩා වීම වැළැක්වීමට */
+    transition: 0.3s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.price-card.featured {
+    border: 2px solid #f39c12;
+    transform: scale(1.05);
+    background: white;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    z-index: 1;
+}
+
+.badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #f39c12;
+    color: white;
+    padding: 5px 12px;
+    font-size: 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.price-card h3 {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 38px;
+    font-weight: 900;
+    margin: 20px 0;
+    color: #222;
+}
+
+.price span {
+    font-size: 16px;
+    color: #888;
+    font-weight: 400;
+}
+
+.price-card ul {
+    list-style: none;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.price-card ul li {
+    padding: 10px 0;
+    color: #666;
+    font-size: 14px;
+    border-bottom: 1px solid #fef5e7;
+}
+
+.buy-btn {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.price-card.featured .buy-btn {
+    background: #f39c12;
+}
+
+.buy-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* ======================================================
+   RESPONSIVE QUERIES
+   ====================================================== */
+
+/* 1. Tablets & Small Laptops (1024px ට අඩු) */
+@media (max-width: 1024px) {
+    .price-card.featured {
+        transform: scale(1); /* Tablet වලදී scale එක අයින් කිරීම වඩාත් සුදුසුයි */
+        margin: 10px 0;
+    }
+    .main-container {
+        padding: 30px;
+    }
+}
+
+/* 2. Standard Tablets (768px ට අඩු) */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .pricing-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .price-card {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+/* 3. Mobile Phones (480px ට අඩු) */
+@media (max-width: 480px) {
+    .main-container {
+        padding: 25px 15px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 5px 10px;
+    }
+
+    .price {
+        font-size: 32px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+}
