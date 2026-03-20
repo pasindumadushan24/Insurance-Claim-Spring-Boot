@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vehicle Insurance</title>
+    <link rel="stylesheet" href="../css/vehical.css">
+</head>
+
+<body>
+
+<div class="main-container">
+
+    <!-- Back Button -->
+    <a href="../pages/vehicalInsurance.html" class="back-btn">← Back</a>
+
+    <h1>VEHICLE <span>INSURANCE</span></h1>
+
+    <div class="info-section">
+        <p>
+            Protect your vehicle with our comprehensive insurance plans.
+            We cover accidents, damages, and theft.
+        </p>
+    </div>
+
+    <!-- Image -->
+    <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8">
+    </div>
+
+    <!-- FORM -->
+    <div class="info-section">
+        <h3>Request a Quote</h3>
+
+        <form id="quoteForm">
+            <input type="text" placeholder="Enter your name" id="name" required>
+            <input type="text" placeholder="Enter your contact number" id="mobile" required>
+            <input type="email" placeholder="Enter your email address" id="email" required>
+
+            <label class="check">
+                <input type="checkbox" required>
+                I agree to Privacy Policy
+            </label>
+
+            <button type="submit">Get a Quote</button>
+        </form>
+
+        <p id="msg"></p>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById("quoteForm").addEventListener("submit", function(e){
+        e.preventDefault();
+
+        const data = {
+            name: document.getElementById("name").value,
+            mobile: document.getElementById("mobile").value,
+            email: document.getElementById("email").value
+        };
+
+        fetch("http://localhost:8080/api/quote", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.text())
+            .then(res => {
+                document.getElementById("msg").innerText = "✅ Request Sent Successfully!";
+            })
+            .catch(err => {
+                document.getElementById("msg").innerText = "❌ Error sending request!";
+            });
+    });
+</script>
+
+</body>
+</html>

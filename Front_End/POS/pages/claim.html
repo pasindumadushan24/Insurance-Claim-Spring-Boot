@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Insurance Claim</title>
+    <link rel="stylesheet" href="../css/claim.css">
+</head>
+<body>
+
+<a href="../pages/vehicalInsurance.html" class="back-circle-btn">←</a>
+
+<div class="container">
+
+
+    <!-- LEFT FORM -->
+    <div class="form-box">
+
+
+
+        <form id="claimForm" enctype="multipart/form-data">
+
+            <select id="product" required>
+                <option value="">Select Product</option>
+                <option>Vehicle Insurance</option>
+                <option>Health Insurance</option>
+            </select>
+
+            <input type="text" placeholder="Policy Number" id="policyNo" required>
+            <input type="text" placeholder="Full Name" id="name" required>
+            <input type="text" placeholder="Contact Number" id="mobile" required>
+            <input type="email" placeholder="Email Address" id="email" required>
+
+            <!-- FILE UPLOAD -->
+            <input type="file" id="file" accept="image/*" required>
+
+            <!-- PREVIEW -->
+            <img id="preview" style="display:none; width:100%; border-radius:10px;">
+
+            <textarea placeholder="Describe your claim..." id="message"></textarea>
+
+            <label class="check">
+                <input type="checkbox" required> I agree to terms
+            </label>
+
+            <button type="submit">Submit Claim ➜</button>
+
+        </form>
+
+        <p id="msg"></p>
+
+    </div>
+
+    <!-- RIGHT TEXT -->
+    <div class="text-box">
+        <h1>Need to Make a Claim?</h1>
+        <h2>We are Here to Help.</h2>
+        <p>Upload your documents and we will contact you soon.</p>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

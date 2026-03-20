@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Insurance | ProtectAll</title>
+    <link rel="stylesheet" href="../css/customer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<nav style="padding:20px;">
+    <a href="../pages/dashboard.html" class="back-link">← Back</a>
+</nav>
+
+<div class="customer-container">
+
+    <div class="form-card">
+        <h3>Add Insurance Policy</h3>
+        <form id="insuranceForm">
+
+            <div class="input-group">
+                <label>Customer Name</label>
+                <input type="text" id="custName" placeholder="Enter Full Name" required>
+            </div>
+
+            <div class="input-group">
+                <label>Contact Number</label>
+                <input type="text" id="custContact" placeholder="07xxxxxxxx" required>
+            </div>
+
+            <div class="input-group">
+                <label>Policy Number</label>
+                <input type="text" id="policyNo" placeholder="POL001" required>
+            </div>
+
+            <div class="input-group">
+                <label>Insurance Type</label>
+                <select id="insuranceType">
+                    <option value="Vehicle">Vehicle Insurance</option>
+                    <option value="Life">Life Insurance</option>
+                    <option value="Home">Home Insurance</option>
+                    <option value="Pet">Pet Insurance</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Premium Amount (LKR)</label>
+                <input type="number" id="premium" placeholder="e.g. 5000">
+            </div>
+
+            <div class="input-group">
+                <label>Start Date</label>
+                <input type="date" id="startDate">
+            </div>
+
+            <div class="input-group">
+                <label>End Date</label>
+                <input type="date" id="endDate">
+            </div>
+
+            <button type="submit" class="auth-btn">Add Policy</button>
+
+        </form>
+    </div>
+
+    <div class="table-card">
+        <h3>Insurance Policies</h3>
+        <table id="customerTable"> <thead>
+        <tr>
+            <th>Name</th>
+            <th>Policy No</th>
+            <th>Type</th>
+            <th>Premium</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+            <tbody id="insuranceTableBody">
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script src="../js/insurance.js"></script>
+
+</body>
+</html>

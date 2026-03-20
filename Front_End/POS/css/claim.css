@@ -1,0 +1,201 @@
+/* --- Global Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f39c12, #ffb347, #ffcc70);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* --- Container --- */
+.container {
+    width: 1000px;
+    display: flex;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    transition: all 0.3s ease-in-out;
+}
+
+/* --- LEFT FORM --- */
+.form-box {
+    flex: 1;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* input fields spacing */
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.form-box:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+form input, form select, form textarea {
+    padding: 16px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    transition: 0.3s;
+    background: rgba(255,255,255,0.9);
+    margin-bottom: 10px; /* extra spacing */
+}
+
+form input:focus, form select:focus, form textarea:focus {
+    box-shadow: 0 0 12px #fff176;
+    transform: scale(1.02);
+}
+
+textarea {
+    height: 120px;
+}
+
+input[type="file"] {
+    background: #fff;
+    cursor: pointer;
+}
+
+/* --- Button --- */
+button {
+    background: linear-gradient(45deg, #f39c12, #ffb347);
+    color: #fff;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+
+/* --- Checkbox --- */
+.check {
+    color: #fff;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --- File preview --- */
+#preview {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border: 2px solid #fff176;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* --- RIGHT TEXT BOX --- */
+.text-box {
+    flex: 1;
+    background: url("https://images.unsplash.com/photo-1521790797524-b2497295b8a0") center/cover no-repeat;
+    position: relative;
+    color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0 25px 25px 0;
+    overflow: hidden;
+}
+
+.text-box::after {
+    content: '';
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.4);
+    border-radius: 0 25px 25px 0;
+    z-index: 0;
+}
+
+.text-box h1,
+.text-box h2,
+.text-box p {
+    position: relative;
+    z-index: 1;
+}
+
+.text-box h1 {
+    font-size: 36px;
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.back-circle-btn {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    width: 40px;
+    height: 40px;
+    background: #f8f9fa;
+    border: 1px solid #eee;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    z-index: 10;
+}
+
+.back-circle-btn:hover {
+    background: #f39c12;
+    color: white;
+    border-color: #f39c12;
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(243, 156, 18, 0.3);
+}
+
+.text-box h1 span {
+    color: #fff176;
+}
+
+.text-box h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.text-box p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* --- Responsive --- */
+@media (max-width: 992px) {
+    .container { flex-direction: column; width: 90%; border-radius: 25px; }
+    .text-box { order: -1; text-align: center; border-radius: 25px 25px 0 0; }
+}
+
+@media (max-width: 480px) {
+    body { padding: 10px; }
+    .container { padding: 20px; }
+    .form-box { padding: 25px; gap: 20px; }
+    .text-box h1 { font-size: 24px; }
+    .text-box h2 { font-size: 18px; }
+    .text-box p { font-size: 14px; }
+    button { padding: 12px; font-size: 14px; }
+}

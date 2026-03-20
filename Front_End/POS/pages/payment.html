@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+</head>
+<body>
+
+<h2>Insurance Claim Payment</h2>
+
+<form method="post" action="https://sandbox.payhere.lk/pay/checkout">
+
+    <!-- Merchant -->
+    <input type="hidden" name="merchant_id" value="YOUR_MERCHANT_ID">
+
+    <!-- URLs -->
+    <input type="hidden" name="return_url" value="http://localhost:8080/success.html">
+    <input type="hidden" name="cancel_url" value="http://localhost:8080/cancel.html">
+
+    <!-- ⚠️ CHANGE THIS USING NGROK -->
+    <input type="hidden" name="notify_url" value="https://YOUR_NGROK_URL/api/payment/notify">
+
+    <!-- Order -->
+    <input type="hidden" name="order_id" value="CLAIM001">
+    <input type="hidden" name="items" value="Insurance Claim Payment">
+    <input type="hidden" name="currency" value="LKR">
+    <input type="hidden" name="amount" value="5000.00">
+
+    <!-- Customer -->
+    <input type="hidden" name="first_name" value="Pasindu">
+    <input type="hidden" name="last_name" value="Madushan">
+    <input type="hidden" name="email" value="test@gmail.com">
+    <input type="hidden" name="phone" value="0771234567">
+    <input type="hidden" name="address" value="Colombo">
+    <input type="hidden" name="city" value="Colombo">
+    <input type="hidden" name="country" value="Sri Lanka">
+
+    <button type="submit">Pay Now</button>
+
+</form>
+
+</body>
+</html>

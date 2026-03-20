@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | ProtectAll</title>
+    <link rel="stylesheet" href="../css/SignupIn.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <a href="../../index.html" class="back-circle-btn">←</a>
+        <div class="auth-header">
+            <div class="logo">PROTECT<span>ALL</span></div>
+            <h2>Create Account</h2>
+            <p>Join us today to secure your future.</p>
+        </div>
+        <form class="auth-form" id="signupForm">
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="reg_username" placeholder="Choose a username" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="reg_password" placeholder="••••••••" required>
+            </div>
+            <input type="hidden" id="reg_role" value="USER">
+            <button type="submit" class="auth-btn">Sign Up</button>
+        </form>
+        <p class="switch-auth">Already have an account? <a href="signin.html">Sign In</a></p>
+    </div>
+</div>
+<script src="../js/auth.js"></script>
+</body>
+</html>
