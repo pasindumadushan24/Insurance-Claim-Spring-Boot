@@ -22,6 +22,8 @@ public class AuthController {
                 (200,"OK",authService.register(registerDTO)));
     }
     @PostMapping("/signin")
+
+
     public ResponseEntity<APIResponse> loginUser(@RequestBody AuthDTO authDTO) {
         return ResponseEntity.ok(new APIResponse(
                 200,"OK",authService.authenticate(authDTO)
