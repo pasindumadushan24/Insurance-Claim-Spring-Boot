@@ -7,14 +7,26 @@ body {
     color: #333;
 }
 
+
 .back-link {
-    text-decoration: none;
-    color: #3498db;
-    font-weight: 500;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;            /* සුදු පාට අකුරු */
+    text-decoration: none;  /* යටින් ඉරි ඉවත් කිරීම */
+    border-radius: 5px;     /* කොන් වටකුරු කිරීම */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    transition: background-color 0.3s ease; /* Hover කරනකොට සිනිඳු වෙනසක් */
 }
 
 .back-link:hover {
-    text-decoration: underline;
+    background-color: #555; /* මවුස් එක උඩ තියද්දී පාට වෙනස් වීම */
+}
+
+/* Nav එකේ පිහිටීම සඳහා */
+nav {
+    margin-bottom: 20px;
 }
 
 .customer-container {

@@ -1,13 +1,9 @@
 package lk.ijse.back_end.controller;
 
-
-
-
-
 import lk.ijse.back_end.dto.APIResponse;
-import lk.ijse.back_end.entity.Insurance;
-import lk.ijse.back_end.service.InsuranceService;
-import lk.ijse.back_end.service.InsuranceViewService;
+import lk.ijse.back_end.dto.InsuranceDTO;
+
+import lk.ijse.back_end.service.custom.InsuranceViewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,19 +16,20 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:63342")
 @RequiredArgsConstructor
 public class InsuranceViewController {
+
     private final InsuranceViewService insuranceViewService;
 
     @PostMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<APIResponse> addInsurance(@RequestBody Insurance insurance){
-        insuranceViewService.save(insurance);
-        return ResponseEntity.ok(new APIResponse(200, "Policy added successfully", null));
+    public ResponseEntity<APIResponse> addInsurance(@RequestBody InsuranceDTO dto){
+        InsuranceDTO saved = insuranceViewService.save(dto);
+        return ResponseEntity.ok(new APIResponse(200, "Policy added successfully", saved));
     }
 
     @GetMapping
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<APIResponse> getAllPolicies(){
-        List<Insurance> list = insuranceViewService.getAll();
+        List<InsuranceDTO> list = insuranceViewService.getAll();
         return ResponseEntity.ok(new APIResponse(200, "Success", list));
     }
 

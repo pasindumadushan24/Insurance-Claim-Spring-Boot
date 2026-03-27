@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Insurance | ProtectAll</title>
+    <title>Insurance Management | ProtectAll</title>
+
     <link rel="stylesheet" href="../css/customer.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 
@@ -16,9 +18,15 @@
 
 <div class="customer-container">
 
+    <!-- ================= FORM ================= -->
     <div class="form-card">
-        <h3>Add Insurance Policy</h3>
+
+        <h3 id="formTitle">Add Insurance Policy</h3>
+
         <form id="insuranceForm">
+
+            <!-- Hidden ID (for update) -->
+            <input type="hidden" id="insuranceId">
 
             <div class="input-group">
                 <label>Customer Name</label>
@@ -60,25 +68,40 @@
                 <input type="date" id="endDate">
             </div>
 
-            <button type="submit" class="auth-btn">Add Policy</button>
+            <button type="submit" class="auth-btn" id="submitBtn">Add Policy</button>
 
         </form>
     </div>
 
+    <!-- ================= TABLE ================= -->
     <div class="table-card">
+
         <h3>Insurance Policies</h3>
-        <table id="customerTable"> <thead>
-        <tr>
-            <th>Name</th>
-            <th>Policy No</th>
-            <th>Type</th>
-            <th>Premium</th>
-            <th>Action</th>
-        </tr>
-        </thead>
+
+        <div class="filter-buttons">
+            <button onclick="loadPolicies()" class="filter-btn active">All</button>
+            <button onclick="loadByType('Life')" class="filter-btn">Life</button>
+            <button onclick="loadByType('Vehicle')" class="filter-btn">Vehicle</button>
+            <button onclick="loadByType('Home')" class="filter-btn">Home</button>
+        </div>
+
+        <table id="customerTable">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Policy No</th>
+                <th>Type</th>
+                <th>Premium</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+
             <tbody id="insuranceTableBody">
+            <!-- JS will load data here -->
             </tbody>
+
         </table>
+
     </div>
 
 </div>

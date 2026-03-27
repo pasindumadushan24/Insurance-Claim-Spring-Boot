@@ -64,6 +64,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/insurance/**").permitAll()
                         .requestMatchers("/api/quote").permitAll()
+                        .requestMatchers("/api/claims/**").permitAll() // allow claim submit
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session ->

@@ -23,7 +23,7 @@ public class AuthService {
     private final JwtUtil jwtUtil;
 
     public AuthResponseDTO authenticate(AuthDTO authDTO){
-        //find user from db
+
         User user=userRepository.findByUsername(authDTO.getUsername()).orElseThrow(
                 () -> new UsernameNotFoundException(authDTO.getUsername()));
         //match passwords (db and request pass)

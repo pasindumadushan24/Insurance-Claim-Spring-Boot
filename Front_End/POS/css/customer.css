@@ -1,11 +1,8 @@
-/* ======================================================
-   CUSTOMER MANAGEMENT SPECIFIC STYLES
-   ====================================================== */
-/* Navigation link එක සඳහා සරල සහ ලස්සන Design එකක් */
+
 .back-link {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #333; /* අළු පාට පසුබිමක් */
+    background-color: #333;
     color: #fff;            /* සුදු පාට අකුරු */
     text-decoration: none;  /* යටින් ඉරි ඉවත් කිරීම */
     border-radius: 5px;     /* කොන් වටකුරු කිරීම */
@@ -137,6 +134,39 @@ nav {
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: bold;
+}
+
+
+
+
+/* Filter Buttons */
+.filter-buttons {
+    margin: 15px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.filter-btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 20px;
+    background-color: #fef5e7;
+    color: #f39c12;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #f39c12;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Active button (optional) */
+.filter-btn.active {
+    background-color: #f39c12;
+    color: white;
 }
 
 /* Delete Button */

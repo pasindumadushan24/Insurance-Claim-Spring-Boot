@@ -1,7 +1,8 @@
 package lk.ijse.back_end.controller;
 
 import lk.ijse.back_end.dto.QuoteDTO;
-import lk.ijse.back_end.service.EmailService;
+
+import lk.ijse.back_end.service.custom.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class QuoteController {
 
     @PostMapping("/quote")
     public String sendQuote(@RequestBody QuoteDTO dto){
-        emailService.sendEmail(dto);
+        emailService.sendQuote(dto);
         return "Email Sent!";
     }
 }

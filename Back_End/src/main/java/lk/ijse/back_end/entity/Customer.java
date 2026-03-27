@@ -20,6 +20,6 @@ public class Customer {
     private String name;
     private String address;
     private String contactNo;
-    private String insuranceType; // Vehicle, Life, Home, Pet
+    private String insuranceType;
     private String policyNumber;
 }

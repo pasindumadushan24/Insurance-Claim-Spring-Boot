@@ -1,6 +1,6 @@
 package lk.ijse.back_end.controller;
 
-import lk.ijse.back_end.service.ClaimService;
+import lk.ijse.back_end.service.ClaimServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,28 +13,28 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class PaymentController {
 
-    private final ClaimService claimService;
+    private final ClaimServiceImpl claimService;
 
     @PostMapping("/notify")
     public ResponseEntity<String> notifyPayment(@RequestParam Map<String, String> params) {
+        // Print all params for debugging
+        params.forEach((k,v) -> System.out.println(k + " : " + v));
 
         String orderId = params.get("order_id");
         String statusCode = params.get("status_code");
         String receivedHash = params.get("md5sig");
 
-        System.out.println("PARAMS: " + params);
-
-        // ✅ HASH VALIDATION
+        // Validate hash
         if (!validateHash(params, receivedHash)) {
-            System.out.println("❌ INVALID HASH");
             return ResponseEntity.badRequest().body("Invalid hash");
         }
 
         if ("2".equals(statusCode)) {
+            // Payment success
             claimService.markAsPaid(orderId);
-            System.out.println("✅ Payment SUCCESS: " + orderId);
+            System.out.println("✅ Payment Success: " + orderId);
         } else {
-            System.out.println("❌ Payment FAILED");
+            System.out.println("❌ Payment Failed: " + orderId);
         }
 
         return ResponseEntity.ok("OK");
@@ -48,32 +48,24 @@ public class PaymentController {
             String currency = params.get("payhere_currency");
             String statusCode = params.get("status_code");
 
-            String merchantSecret = "YOUR_MERCHANT_SECRET";
+            String merchantSecret = "YOUR_SANDBOX_SECRET"; // Change to your PayHere sandbox secret
 
-            String secretHash = md5(merchantSecret).toUpperCase();
+            String toHash = merchantId + orderId + amount + currency + statusCode + merchantSecret;
 
-            String raw = merchantId + orderId + amount + currency + statusCode + secretHash;
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(toHash.getBytes());
+            byte[] digest = md.digest();
 
-            String localHash = md5(raw).toUpperCase();
+            StringBuilder sb = new StringBuilder();
+            for (byte b : digest) {
+                sb.append(String.format("%02x", b & 0xff));
+            }
 
-            System.out.println("LOCAL HASH: " + localHash);
-            System.out.println("RECEIVED HASH: " + receivedHash);
-
-            return localHash.equalsIgnoreCase(receivedHash);
+            return sb.toString().equalsIgnoreCase(receivedHash);
 
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
-    }
-
-    private String md5(String input) throws Exception {
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] array = md.digest(input.getBytes());
-
-        StringBuilder sb = new StringBuilder();
-        for (byte b : array) {
-            sb.append(String.format("%02x", b));
-        }
-        return sb.toString();
     }
 }
