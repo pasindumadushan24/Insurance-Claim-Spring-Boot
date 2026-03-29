@@ -2,44 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Insurance Claim Payment</title>
+    <title>Secure Payment</title>
     <link rel="stylesheet" href="../css/payment.css">
 </head>
 <body>
 
-<h2>Insurance Claim Payment</h2>
+<a href="../../index.html" class="back-circle-btn">←</a>
 
-<form id="paymentForm" method="post" action="https://sandbox.payhere.lk/pay/checkout">
+<div class="container">
+    <div class="payment-card">
 
+        <h2>🔒 Secure Payment</h2>
 
-    <input type="hidden" name="merchant_id" value="1234715">
+        <!-- Claim Details -->
+        <div class="section">
+            <label>ID</label>
+            <input type="text" id="claimId" placeholder="Registered ID">
 
-    <input type="hidden" name="return_url" value="https://YOUR_PUBLIC_URL/success.html">
-    <input type="hidden" name="cancel_url" value="https://YOUR_PUBLIC_URL/cancel.html">
-    <input type="hidden" name="notify_url" value="https://YOUR_PUBLIC_URL/api/payment/notify">
+            <label>Amount (LKR)</label>
+            <input type="number" id="amount" placeholder="Enter Amount">
+        </div>
 
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('card')">Card</button>
+            <button class="tab" onclick="showTab('cash')">Cash</button>
+        </div>
 
-    <input type="hidden" name="order_id" value="">
-    <input type="hidden" name="items" value="Insurance Claim Payment">
-    <input type="hidden" name="currency" value="LKR">
-    <input type="hidden" name="amount" value="5000.00">
+        <!-- CARD TAB -->
+        <div id="cardTab" class="tab-content active">
 
+            <div class="section">
 
-    <input type="hidden" name="first_name" value="Pasindu">
-    <input type="hidden" name="last_name" value="Madushan">
-    <input type="hidden" name="email" value="test@gmail.com">
-    <input type="hidden" name="phone" value="0771234567">
-    <input type="hidden" name="address" value="Colombo">
-    <input type="hidden" name="city" value="Colombo">
-    <input type="hidden" name="country" value="Sri Lanka">
+                <!-- Logos -->
+                <div class="card-logos">
+                    <img src="https://img.icons8.com/color/48/visa.png"/>
+                    <img src="https://img.icons8.com/color/48/mastercard.png"/>
+                    <img src="https://img.icons8.com/color/48/amex.png"/>
+                    <img src="https://img.icons8.com/color/48/discover.png"/>
+                    <img src="https://img.icons8.com/color/48/maestro.png"/>
+                </div>
 
-    <button type="submit">Pay Now</button>
-</form>
+                <label>Card Number</label>
+                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
 
-<script>
-    // ✅ Generate a unique order ID every time form loads
-    document.querySelector('input[name="order_id"]').value = "CLAIM" + Date.now();
-</script>
+                <div class="row">
+                    <div>
+                        <label>Expiry</label>
+                        <input type="text" id="expiry" placeholder="MM/YY">
+                    </div>
+                    <div>
+                        <label>CVV</label>
+                        <input type="text" id="cvv" placeholder="123">
+                    </div>
+                </div>
 
+            </div>
+
+            <button class="pay-btn" onclick="payCard()">Pay Now</button>
+
+        </div>
+
+        <!-- CASH TAB -->
+        <div id="cashTab" class="tab-content">
+
+            <p class="info">
+                Pay at our office and confirm your payment.
+            </p>
+
+            <button class="cash-btn" onclick="payCash()">Confirm Cash Payment</button>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="../js/payment.js"></script>
 </body>
 </html>
