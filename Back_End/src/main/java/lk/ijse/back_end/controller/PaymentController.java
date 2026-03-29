@@ -1,6 +1,6 @@
 package lk.ijse.back_end.controller;
 
-import lk.ijse.back_end.service.ClaimServiceImpl;
+import lk.ijse.back_end.service.custom.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,5 +35,9 @@ public class PaymentController {
         paymentService.payByCash(claimId, amount);
 
         return ResponseEntity.ok("Cash Payment Recorded");
+    }
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllPayments() {
+        return ResponseEntity.ok(paymentService.getAllPayments());
     }
 }
