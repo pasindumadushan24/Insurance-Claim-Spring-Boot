@@ -23,7 +23,6 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
-
     @Override
     public AuthResponseDTO authenticate(AuthDTO authDTO) {
 
@@ -35,9 +34,9 @@ public class AuthServiceImpl implements AuthService {
         }
 
         String token = jwtUtil.generateToken(user.getUsername());
-        return new AuthResponseDTO(token);
-    }
 
+        return new AuthResponseDTO(token, user.getRole().name()); // 👈 role return
+    }
     @Override
     public String register(RegisterDTO registerDTO) {
         if (userRepository.findByUsername(registerDTO.getUsername()).isPresent()) {
