@@ -63,9 +63,11 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/users/**").hasAnyAuthority("ADMIN", "OWNER")
                         .requestMatchers("/api/insurance/**").permitAll()
                         .requestMatchers("/api/quote").permitAll()
-                        .requestMatchers("/api/claims/**").permitAll() // allow claim submit
+                        .requestMatchers("/api/claims/**").permitAll()
+                        .requestMatchers("/api/payment/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session ->
