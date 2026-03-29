@@ -15,4 +15,5 @@ public class CustomerDto {
     private String contactNo;
     private String insuranceType;
     private String policyNumber;
+
 }
