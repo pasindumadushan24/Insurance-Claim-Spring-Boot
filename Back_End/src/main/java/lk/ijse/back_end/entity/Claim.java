@@ -20,6 +20,8 @@ public class Claim {
     private String message;
 
 
+
+
     @Lob
     private byte[] image;
 }
