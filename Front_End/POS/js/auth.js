@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+
     const signinForm = document.getElementById('signinForm');
     const signupForm = document.getElementById('signupForm');
 
     const BASE_URL = "http://localhost:8080/api/v1/auth";
 
-    // --- SIGN UP LOGIC ---
+    // --- SIGN UP ---
     if (signupForm) {
         signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -12,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const userData = {
                 username: document.getElementById('reg_username').value,
                 password: document.getElementById('reg_password').value,
-                role: document.getElementById('reg_role').value // Sends "USER" as per DTO
+                role: document.getElementById('reg_role').value
             };
 
             try {
@@ -25,19 +26,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (response.ok) {
-                    alert("Registration Successful! Please Sign In.");
+                    alert("Registration Successful!");
                     window.location.href = "signin.html";
                 } else {
                     alert("Registration Failed: " + (result.data || result.message));
                 }
+
             } catch (error) {
-                console.error("Error:", error);
-                alert("Server Error. Make sure Backend is running.");
+                console.error(error);
+                alert("Server Error");
             }
         });
     }
 
-    // --- SIGN IN LOGIC ---
+    // --- SIGN IN ---
     if (signinForm) {
         signinForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -57,19 +59,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (response.ok) {
-                    // result.data contains AuthResponseDTO which has accessToken
                     const token = result.data.accessToken;
-                    localStorage.setItem('jwtToken', token); // Save token for future API calls
+                    const role = result.data.role;
 
-                    alert("Login Successful!");
-                    window.location.href = "../../index.html";
+                    localStorage.setItem("jwtToken", token);
+                    localStorage.setItem("userRole", role);
+
+                    // ✅ redirect
+                    if (role === "USER") {
+                        window.location.href = "../pages/dashboard2.html";
+                    } else if (role === "ADMIN") {
+                        window.location.href = "../pages/dashboard.html";
+                    } else if (role === "OWNER") {
+                        window.location.href = "../pages/dashboard.html";
+                    }
+
                 } else {
                     alert("Login Failed: " + result.message);
                 }
+
             } catch (error) {
-                console.error("Error:", error);
-                alert("Server connection failed.");
+                console.error(error);
+                alert("Server Error");
             }
-        });
+
+        }); // ✅ THIS WAS MISSING
     }
+
 });
