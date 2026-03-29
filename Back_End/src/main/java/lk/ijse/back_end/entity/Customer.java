@@ -22,4 +22,5 @@ public class Customer {
     private String contactNo;
     private String insuranceType;
     private String policyNumber;
+
 }
