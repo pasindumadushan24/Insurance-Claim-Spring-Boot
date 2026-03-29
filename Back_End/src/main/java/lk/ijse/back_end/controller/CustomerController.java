@@ -35,10 +35,12 @@ public class CustomerController {
         return ResponseEntity.ok(new APIResponse(200, "Success", customerDto));
     }
 
+
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Void> deleteCustomer(@PathVariable Long id){
         customerService.deleteCustomer(id);
         return ResponseEntity.noContent().build();
+
     }
 }
