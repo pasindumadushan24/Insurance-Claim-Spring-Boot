@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Payments | ProtectAll</title>
+    <link rel="stylesheet" href="../css/insuranceView.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav style="padding:20px;">
+    <a href="dashboard.html" class="back-link">← Back</a>
+</nav>
+
+<div class="customer-container">
+    <div class="table-card">
+        <h3>All Payment Details</h3>
+        <table id="paymentTable" border="1" style="width:100%; margin-top:20px;">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Claim ID</th>
+                <th>Amount</th>
+                <th>Method</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody id="paymentTableBody">
+            <!-- JS will populate rows here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="../js/payment.js"></script>
+</body>
+</html>
