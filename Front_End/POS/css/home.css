@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #f39c12; /* ඔයාගේ ප්‍රධාන තේමා වර්ණය */
+    background-color: #f39c12;
     min-height: 100vh;
     padding: 50px 20px;
     display: flex;
@@ -15,7 +15,7 @@ body {
     align-items: center;
 }
 
-/* --- Main Container --- */
+
 .main-container {
     background: white;
     width: 100%;
@@ -31,7 +31,7 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Headings --- */
+
 h1 {
     color: #333;
     margin-bottom: 25px;
