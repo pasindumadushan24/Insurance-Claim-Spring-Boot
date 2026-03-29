@@ -7,9 +7,10 @@ import lk.ijse.back_end.dto.RegisterDTO;
 import lk.ijse.back_end.entity.Role;
 import lk.ijse.back_end.entity.User;
 import lk.ijse.back_end.repository.UserRepository;
+
+import lk.ijse.back_end.service.custom.AuthService;
 import lk.ijse.back_end.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,32 +18,38 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class AuthServiceImpl implements AuthService {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
-    public AuthResponseDTO authenticate(AuthDTO authDTO){
+    @Override
+    public AuthResponseDTO authenticate(AuthDTO authDTO) {
 
-        User user=userRepository.findByUsername(authDTO.getUsername()).orElseThrow(
-                () -> new UsernameNotFoundException(authDTO.getUsername()));
-        //match passwords (db and request pass)
-        if (!passwordEncoder.matches(authDTO.getPassword(),user.getPassword())){
-            throw new BadCredentialsException(authDTO.getUsername());
+        User user = userRepository.findByUsername(authDTO.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException(authDTO.getUsername()));
+
+        if (!passwordEncoder.matches(authDTO.getPassword(), user.getPassword())) {
+            throw new BadCredentialsException("Invalid credentials");
         }
-        //generate new token
-        String token=jwtUtil.generateToken(authDTO.getUsername());
+
+        String token = jwtUtil.generateToken(user.getUsername());
         return new AuthResponseDTO(token);
     }
-    public String register(RegisterDTO registerDTO){
-        if (userRepository.findByUsername(registerDTO.getUsername()).isPresent()){
-            throw new RuntimeException("Username is already in use");
+
+    @Override
+    public String register(RegisterDTO registerDTO) {
+        if (userRepository.findByUsername(registerDTO.getUsername()).isPresent()) {
+            throw new RuntimeException("Username already exists");
         }
-        User user=User.builder()
+
+        User user = User.builder()
                 .username(registerDTO.getUsername())
                 .password(passwordEncoder.encode(registerDTO.getPassword()))
                 .role(Role.valueOf(registerDTO.getRole()))
                 .build();
+
         userRepository.save(user);
         return "User registered successfully";
     }
