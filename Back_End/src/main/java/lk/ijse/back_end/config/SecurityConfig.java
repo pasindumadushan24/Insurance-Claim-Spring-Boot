@@ -30,6 +30,7 @@ public class SecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final PasswordEncoder passwordEncoder;
 
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
