@@ -2,8 +2,10 @@ package lk.ijse.back_end.controller;
 
 import lk.ijse.back_end.entity.User;
 
+import lk.ijse.back_end.repository.UserRepository;
 import lk.ijse.back_end.service.custom.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService service;
+    private final UserRepository userRepository;
 
     @PostMapping
     public User addUser(@RequestBody User user){
@@ -34,5 +37,9 @@ public class UserController {
     @GetMapping("/{id}")
     public User getUser(@PathVariable Long id){
         return service.getUser(id);
+    }
+    @GetMapping("/me")
+    public User getCurrentUser(Authentication authentication){
+        return userRepository.findByUsername(authentication.getName()).orElse(null);
     }
 }
