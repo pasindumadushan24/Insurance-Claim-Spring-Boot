@@ -7,65 +7,33 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.MessageDigest;
 import java.util.Map;
-
 @RestController
 @RequestMapping("/api/payment")
 @RequiredArgsConstructor
+@CrossOrigin
 public class PaymentController {
 
-    private final ClaimServiceImpl claimService;
+    private final PaymentService paymentService;
 
-    @PostMapping("/notify")
-    public ResponseEntity<String> notifyPayment(@RequestParam Map<String, String> params) {
-        // Print all params for debugging
-        params.forEach((k,v) -> System.out.println(k + " : " + v));
+    @PostMapping("/card")
+    public ResponseEntity<?> payByCard(@RequestBody Map<String, Object> data) {
 
-        String orderId = params.get("order_id");
-        String statusCode = params.get("status_code");
-        String receivedHash = params.get("md5sig");
+        String claimId = data.get("claimId").toString();
+        double amount = Double.parseDouble(data.get("amount").toString());
 
-        // Validate hash
-        if (!validateHash(params, receivedHash)) {
-            return ResponseEntity.badRequest().body("Invalid hash");
-        }
+        paymentService.payByCard(claimId, amount);
 
-        if ("2".equals(statusCode)) {
-            // Payment success
-            claimService.markAsPaid(orderId);
-            System.out.println("✅ Payment Success: " + orderId);
-        } else {
-            System.out.println("❌ Payment Failed: " + orderId);
-        }
-
-        return ResponseEntity.ok("OK");
+        return ResponseEntity.ok("Card Payment Success");
     }
 
-    private boolean validateHash(Map<String, String> params, String receivedHash) {
-        try {
-            String merchantId = params.get("merchant_id");
-            String orderId = params.get("order_id");
-            String amount = params.get("payhere_amount");
-            String currency = params.get("payhere_currency");
-            String statusCode = params.get("status_code");
+    @PostMapping("/cash")
+    public ResponseEntity<?> payByCash(@RequestBody Map<String, Object> data) {
 
-            String merchantSecret = "YOUR_SANDBOX_SECRET"; // Change to your PayHere sandbox secret
+        String claimId = data.get("claimId").toString();
+        double amount = Double.parseDouble(data.get("amount").toString());
 
-            String toHash = merchantId + orderId + amount + currency + statusCode + merchantSecret;
+        paymentService.payByCash(claimId, amount);
 
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(toHash.getBytes());
-            byte[] digest = md.digest();
-
-            StringBuilder sb = new StringBuilder();
-            for (byte b : digest) {
-                sb.append(String.format("%02x", b & 0xff));
-            }
-
-            return sb.toString().equalsIgnoreCase(receivedHash);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        return ResponseEntity.ok("Cash Payment Recorded");
     }
 }
