@@ -20,6 +20,7 @@ public class ClaimServiceImpl implements ClaimService {
     private final ClaimRepository claimRepository;
     private final ModelMapper mapper;
 
+
     @Override
     public ClaimDTO saveClaim(ClaimDTO dto) {
         Claim claim = mapper.map(dto, Claim.class);
