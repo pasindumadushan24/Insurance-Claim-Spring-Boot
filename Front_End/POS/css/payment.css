@@ -1,38 +1,176 @@
-
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #1abc9c, #3498db);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    color: #fff;
-}
-
-h2 { margin-bottom: 20px; }
-form {
-    background: rgba(255,255,255,0.1);
+/* Payment Box */
+.payment-card {
+    background: #ffffff;
     padding: 30px;
-    border-radius: 15px;
-    text-align: left;
-    width: 350px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
 }
 
-button {
-    padding: 12px 25px;
-    background: #fff;
-    color: #3498db;
+/* Title */
+.payment-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+/* Labels */
+.payment-card label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+}
+
+/* Inputs */
+.payment-card input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    transition: 0.3s;
+}
+
+.payment-card input:focus {
+    border-color: #f39c12;
+    outline: none;
+    box-shadow: 0 0 5px rgba(243,156,18,0.4);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    margin: 15px 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
     border: none;
-    border-radius: 25px;
     cursor: pointer;
-    font-weight: bold;
-    margin-top: 15px;
+    background: #f8f9fa;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
-button:hover {
-    background: #2980b9;
-    color: #fff;
+.tab.active {
+    background: #f39c12;
+    color: white;
 }
+
+/* Card / Cash sections */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Row (expiry + cvv) */
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+/* Buttons */
+.pay-btn {
+    width: 100%;
+    padding: 14px;
+    background: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.pay-btn:hover {
+    background: #e67e22;
+    transform: translateY(-2px);
+}
+
+/* Cash button */
+.cash-btn {
+    width: 100%;
+    padding: 14px;
+    background: transparent;
+    border: 2px solid #f39c12;
+    color: #f39c12;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cash-btn:hover {
+    background: #f39c12;
+    color: white;
+}
+
+/* Info text */
+.info {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Container align (same as your layout) */
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+
+.card-logos {
+    display: flex;
+    gap: 10px;
+    margin: 8px 0;
+    align-items: center;
+}
+
+.card-logos img {
+    width: 45px;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.card-logos img:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+
+.back-circle-btn {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    width: 40px;
+    height: 40px;
+    background: #e8be6e;
+    border: 1px solid #eee;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    z-index: 10;
+}
+
+.back-circle-btn:hover {
+    background: #f39c12;
+    color: white;
+    border-color: #f39c12;
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(243, 156, 18, 0.3);
+}
+
