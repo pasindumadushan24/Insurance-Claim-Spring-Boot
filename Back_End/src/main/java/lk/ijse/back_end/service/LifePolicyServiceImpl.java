@@ -1,5 +1,5 @@
 package lk.ijse.back_end.service;
-
+import org.springframework.transaction.annotation.Transactional;
 import lk.ijse.back_end.dto.LifePolicyDTO;
 import lk.ijse.back_end.entity.LifePolicy;
 import lk.ijse.back_end.repository.LifePolicyRepository;
@@ -42,6 +42,19 @@ public class LifePolicyServiceImpl implements LifePolicyService {
 
         return repo.save(p);
     }
+    @Transactional
+    @Override
+    public void updateStatus(Integer id, String status) {
+
+        LifePolicy policy = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Policy not found"));
+
+        policy.setStatus(status);
+
+        repo.save(policy); // 🔥 important
+    }
+
+
 
     @Override
     public List<LifePolicy> getAll() {
