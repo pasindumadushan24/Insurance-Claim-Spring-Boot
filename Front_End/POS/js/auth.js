@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else if (role === "ADMIN") {
                         window.location.href = "../pages/dashboard.html";
                     } else if (role === "OWNER") {
-                        window.location.href = "../pages/dashboard.html";
+                        window.location.href = "../pages/dashboard2.html";
                     }
 
                 } else {
