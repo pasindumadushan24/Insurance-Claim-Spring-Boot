@@ -90,6 +90,8 @@ async function payCash() {
     }
 }
 
+
+
 // Switch Tabs
 function showTab(tab) {
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
