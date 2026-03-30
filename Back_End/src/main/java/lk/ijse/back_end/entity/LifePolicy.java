@@ -36,4 +36,7 @@ public class LifePolicy {
     private double monthlyPremium;
     private LocalDate policyStart;
     private String plan;
+
+    public void setStatus(String status) {
+    }
 }
