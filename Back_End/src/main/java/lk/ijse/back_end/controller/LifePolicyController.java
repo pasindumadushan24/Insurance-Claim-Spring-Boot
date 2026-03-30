@@ -23,4 +23,21 @@ public class LifePolicyController {
     public ResponseEntity<?> getAll(){
         return ResponseEntity.ok(service.getAll());
     }
+
+
+
+    @PutMapping("/approve/{id}")
+    public void approve(@PathVariable Integer id){
+        service.updateStatus(id, "APPROVED");
+    }
+
+    @PutMapping("/reject/{id}")
+    public void reject(@PathVariable Integer id){
+        service.updateStatus(id, "REJECTED");
+    }
+
+    @PutMapping("/pay/{id}")
+    public void pay(@PathVariable Integer id){
+        service.updateStatus(id, "PAID");
+    }
 }

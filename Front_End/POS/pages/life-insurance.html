@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Life Insurance</title>
+    <link rel="stylesheet" href="../css/life.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Life Insurance Form</h2>
+
+    <!-- PERSONAL -->
+    <h3>Personal Details</h3>
+    <input type="text" id="fullName" placeholder="Full Name">
+    <input type="text" id="nic" placeholder="NIC">
+    <input type="date" id="dob">
+
+    <select id="gender">
+        <option value="">Select Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+    </select>
+
+    <input type="email" id="email" placeholder="Email">
+    <input type="text" id="mobile" placeholder="Mobile">
+    <input type="text" id="address" placeholder="Address">
+
+    <!-- HEALTH -->
+    <h3>Health Details</h3>
+    <input type="number" id="height" placeholder="Height (cm)">
+    <input type="number" id="weight" placeholder="Weight (kg)">
+
+    <label>Smoking</label><br>
+    <input type="radio" name="smoker" value="true"> Yes
+    <input type="radio" name="smoker" value="false"> No
+
+    <input type="text" id="diseases" placeholder="Existing Diseases">
+
+    <!-- POLICY -->
+    <h3>Policy Details</h3>
+    <input type="number" id="sumAssured" placeholder="Sum Assured (LKR)">
+    <input type="number" id="policyTerm" placeholder="Policy Term (years)">
+    <input type="number" id="monthlyPremium" placeholder="Monthly Premium">
+
+    <input type="date" id="policyStart">
+
+    <select id="plan">
+        <option value="">Select Plan</option>
+        <option>Basic</option>
+        <option>Standard</option>
+        <option>Premium</option>
+    </select>
+
+    <button onclick="saveLifePolicy()">Submit Policy</button>
+
+</div>
+
+<script src="../js/life.js"></script>
+</body>
+</html>
