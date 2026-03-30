@@ -57,17 +57,21 @@ public class SecurityConfig {
     }
 
 
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/api/users/**").hasAnyAuthority("ADMIN", "OWNER")
+                        .requestMatchers("/api/users/**").permitAll()
                         .requestMatchers("/api/insurance/**").permitAll()
                         .requestMatchers("/api/quote").permitAll()
                         .requestMatchers("/api/claims/**").permitAll()
                         .requestMatchers("/api/payment/**").permitAll()
+                        .requestMatchers("/api/policy/**").permitAll()
+                        .requestMatchers("/api/life-policy/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session ->
