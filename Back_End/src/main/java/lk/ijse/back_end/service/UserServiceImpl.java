@@ -5,6 +5,7 @@ import lk.ijse.back_end.entity.User;
 import lk.ijse.back_end.repository.UserRepository;
 import lk.ijse.back_end.service.custom.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -13,9 +14,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repo;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword())); // 🔥 IMPORTANT
         return repo.save(user);
     }
 
