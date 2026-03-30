@@ -15,29 +15,31 @@ public class LifePolicyController {
     private final LifePolicyService service;
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody LifePolicyDTO dto){
+    public ResponseEntity<?> save(@RequestBody LifePolicyDTO dto) {
         return ResponseEntity.ok(service.save(dto));
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> getAll(){
+    public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(service.getAll());
     }
 
 
-
     @PutMapping("/approve/{id}")
-    public void approve(@PathVariable Integer id){
+    public ResponseEntity<String> approve(@PathVariable Integer id) {
         service.updateStatus(id, "APPROVED");
+        return ResponseEntity.ok("Approved");
     }
 
     @PutMapping("/reject/{id}")
-    public void reject(@PathVariable Integer id){
+    public ResponseEntity<String> reject(@PathVariable Integer id) {
         service.updateStatus(id, "REJECTED");
+        return ResponseEntity.ok("Rejected");
     }
 
     @PutMapping("/pay/{id}")
-    public void pay(@PathVariable Integer id){
+    public ResponseEntity<String> pay(@PathVariable Integer id) {
         service.updateStatus(id, "PAID");
+        return ResponseEntity.ok("Paid");
     }
 }
