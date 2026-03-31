@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Insurance</title>
+
+    <!-- 🔥 LIFE CSS eka reuse karanawa -->
+    <link rel="stylesheet" href="../css/homeForm.css">
+
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Home Insurance Form</h2>
+
+    <h3>Personal Details</h3>
+    <input type="text" id="fullName" placeholder="Full Name">
+    <input type="text" id="nic" placeholder="NIC">
+    <input type="email" id="email" placeholder="Email">
+    <input type="text" id="mobile" placeholder="Mobile">
+    <input type="text" id="address" placeholder="Address">
+
+    <h3>Home Details</h3>
+    <input type="text" id="houseType" placeholder="House Type">
+    <input type="number" id="houseValue" placeholder="House Value">
+    <input type="number" id="yearBuilt" placeholder="Year Built">
+
+    <label>Security System</label><br>
+    <input type="radio" name="security" value="true"> Yes
+    <input type="radio" name="security" value="false"> No
+
+    <h3>Policy Details</h3>
+    <input type="number" id="coverageAmount" placeholder="Coverage Amount">
+    <input type="number" id="policyTerm" placeholder="Policy Term">
+    <input type="number" id="monthlyPremium" placeholder="Monthly Premium">
+
+    <input type="date" id="policyStart">
+
+    <select id="plan">
+        <option value="">Select Plan</option>
+        <option>Basic</option>
+        <option>Standard</option>
+        <option>Premium</option>
+    </select>
+
+    <button onclick="saveHomePolicy()">Submit</button>
+
+</div>
+
+<script src="../js/home.js"></script>
+</body>
+</html>
