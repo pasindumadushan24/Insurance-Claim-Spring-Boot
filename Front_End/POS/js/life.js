@@ -31,7 +31,9 @@ function saveLifePolicy(){
         .then(res => res.json())
         .then(res => {
             alert("Life Policy Saved Successfully ✅");
-            console.log(res);
+
+            // 👉 redirect
+            window.location.href = "payment.html";
         })
         .catch(err => {
             console.error(err);
