@@ -72,6 +72,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/payment/**").permitAll()
                         .requestMatchers("/api/policy/**").permitAll()
                         .requestMatchers("/api/life-policy/**").permitAll()
+                        .requestMatchers("/api/home-policy/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session ->
