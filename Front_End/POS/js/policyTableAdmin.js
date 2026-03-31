@@ -61,10 +61,10 @@ function payPolicy(id){
 
 function approvePolicy(id) {
     alert("Approve policy ID: " + id);
-    // backend API integration for approval can be added here
+
 }
 
 function rejectPolicy(id) {
     alert("Reject policy ID: " + id);
-    // backend API integration for rejection can be added here
+
 }
