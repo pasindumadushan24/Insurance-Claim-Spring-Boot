@@ -1,0 +1,212 @@
+/* ===== GENERAL BODY & CONTAINER ===== */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f39c12; /* orange background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #f39c12;
+}
+
+h3 {
+    margin-top: 20px;
+    color: #333;
+}
+
+/* ===== INPUTS & SELECTS ===== */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 0.95rem;
+}
+
+/* ===== RADIO BUTTONS ===== */
+label {
+    font-weight: 600;
+    margin-top: 10px;
+    display: block;
+}
+
+/* ===== BUTTON ===== */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #d68910;
+    transform: translateY(-2px);
+}
+
+/* ===== TABLE (ADMIN) ===== */
+.table-card {
+    flex: 1;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #fef5e7;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.table-card h2 {
+    margin-bottom: 20px;
+    color: #f39c12;
+}
+
+/* ===== LIFE/HOME POLICY TABLE ===== */
+#homePolicyTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#homePolicyTable th {
+    text-align: left;
+    padding: 15px;
+    background-color: #fef5e7;
+    color: #f39c12;
+    font-weight: 700;
+    border-bottom: 2px solid #f39c12;
+}
+
+#homePolicyTable td {
+    padding: 15px;
+    border-bottom: 1px solid #fef5e7;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+#homePolicyTable tr:hover {
+    background-color: #fffdf9;
+}
+
+/* ===== STATUS BADGES ===== */
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+}
+
+.pending {
+    background-color: #f39c12;
+}
+
+.approved {
+    background-color: #2ecc71;
+}
+
+.rejected {
+    background-color: #e74c3c;
+}
+
+.paid {
+    background-color: #3498db; /* blue for PAID */
+}
+
+/* ===== ACTION BUTTONS ===== */
+.action-btn {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: 0.3s;
+    color: white;
+    font-weight: bold;
+}
+
+.approve-btn {
+    background-color: #2ecc71; /* green */
+}
+
+.approve-btn:hover {
+    background-color: #27ae60;
+    transform: scale(1.05);
+}
+
+.reject-btn {
+    background-color: #e74c3c; /* red */
+}
+
+.reject-btn:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+.pay-btn {
+    background-color: #3498db; /* blue */
+}
+
+.pay-btn:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* DONE TEXT */
+.done-text {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+/* FILTER BUTTONS (optional) */
+.filter-buttons {
+    margin: 15px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.filter-btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 20px;
+    background-color: #fef5e7;
+    color: #f39c12;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #f39c12;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background-color: #f39c12;
+    color: white;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .claim-container {
+        flex-direction: column;
+    }
+}
