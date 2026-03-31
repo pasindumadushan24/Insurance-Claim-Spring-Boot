@@ -8,10 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // MEKA PASSE SPRING BOOT API EKKA REPLACE KARANNA OONE
             console.log("Logging in with:", email);
 
-            // Mock Logic for demonstration:
             if (email === 'admin@test.com') {
                 // Employee/Admin log wunoth
                 alert("Login Successful as Employee!");

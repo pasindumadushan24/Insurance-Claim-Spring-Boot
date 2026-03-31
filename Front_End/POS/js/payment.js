@@ -8,7 +8,8 @@ async function loadPayments() {
         const payments = await res.json();
 
         const tbody = document.querySelector("#paymentTableBody");
-        if (!tbody) return; // table not found, avoid error
+        if (!tbody) return;
+
 
         tbody.innerHTML = "";
 
