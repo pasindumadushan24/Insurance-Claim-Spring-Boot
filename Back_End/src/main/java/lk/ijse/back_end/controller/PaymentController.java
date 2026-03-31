@@ -32,6 +32,7 @@ public class PaymentController {
         String claimId = data.get("claimId").toString();
         double amount = Double.parseDouble(data.get("amount").toString());
 
+
         paymentService.payByCash(claimId, amount);
 
         return ResponseEntity.ok("Cash Payment Recorded");
