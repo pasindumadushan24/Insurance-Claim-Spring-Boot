@@ -24,6 +24,7 @@ function saveHomePolicy() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
     })
+
         .then(() => {
             alert("Saved ✅");
             window.location.href = "payment.html";
