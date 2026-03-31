@@ -1,0 +1,156 @@
+/* ===== GENERAL TABLE CARD ===== */
+.table-card {
+    flex: 1;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #fef5e7;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    margin: 20px auto;
+    width: 95%;
+}
+
+.table-card h2 {
+    margin-bottom: 20px;
+    color: #f39c12;
+    text-align: center;
+}
+
+/* ===== TABLE ===== */
+#homePolicyTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#homePolicyTable th {
+    text-align: left;
+    padding: 15px;
+    background-color: #fef5e7;
+    color: #f39c12;
+    font-weight: 700;
+    border-bottom: 2px solid #f39c12;
+}
+
+#homePolicyTable td {
+    padding: 15px;
+    border-bottom: 1px solid #fef5e7;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+#homePolicyTable tr:hover {
+    background-color: #fffdf9;
+}
+
+/* ===== STATUS BADGES ===== */
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+}
+
+.pending {
+    background-color: #f39c12;
+}
+
+.approved {
+    background-color: #2ecc71;
+}
+
+.rejected {
+    background-color: #e74c3c;
+}
+
+.paid {
+    background-color: #3498db; /* blue for PAID */
+}
+
+/* ===== ACTION BUTTONS ===== */
+.action-btn {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: 0.3s;
+    color: white;
+    font-weight: bold;
+}
+
+.approve-btn {
+    background-color: #2ecc71; /* green */
+}
+
+.approve-btn:hover {
+    background-color: #27ae60;
+    transform: scale(1.05);
+}
+
+.reject-btn {
+    background-color: #e74c3c; /* red */
+}
+
+.reject-btn:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+.pay-btn {
+    background-color: #3498db; /* blue */
+}
+
+.pay-btn:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* DONE TEXT */
+.done-text {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+/* FILTER BUTTONS (optional) */
+.filter-buttons {
+    margin: 15px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.filter-btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 20px;
+    background-color: #fef5e7;
+    color: #f39c12;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #f39c12;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background-color: #f39c12;
+    color: white;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .table-card {
+        width: 100%;
+        padding: 15px;
+    }
+
+    #homePolicyTable th, #homePolicyTable td {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+}
