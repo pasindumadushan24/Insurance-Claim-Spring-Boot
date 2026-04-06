@@ -13,7 +13,7 @@ public interface ClaimService {
 
     ClaimDTO getById(String claimId);
 
-    void updateStatus(String claimId, String status);
+    ClaimDTO updateStatus(String claimId, String status);
 
     void markAsPaid(String claimId);
 }

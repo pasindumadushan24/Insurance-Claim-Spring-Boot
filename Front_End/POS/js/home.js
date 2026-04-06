@@ -1,5 +1,14 @@
-function saveHomePolicy() {
+// 🔹 Page load උනාම next policy code fetch කරන්න
+window.addEventListener('DOMContentLoaded', () => {
+    fetch('http://localhost:8080/api/home-policy/next-policy-code')
+        .then(response => response.text())
+        .then(code => {
+            document.getElementById('policyNo').value = code; // POLH001, POLH002 ...
+        })
+        .catch(err => console.error('Policy code fetch error:', err));
+});
 
+function saveHomePolicy() {
     const data = {
         fullName: document.getElementById("fullName").value,
         nic: document.getElementById("nic").value,
@@ -24,9 +33,18 @@ function saveHomePolicy() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
     })
+        .then(res => res.text())
+        .then(policyCode => {
+            document.getElementById("policyNo").value = policyCode;
+            alert("Saved ✅ Policy No: " + policyCode);
 
-        .then(() => {
-            alert("Saved ✅");
-            window.location.href = "payment.html";
+            // Optional: redirect
+            setTimeout(() => {
+                window.location.href = "payment.html";
+            }, 1000);
+        })
+        .catch(err => {
+            console.error("Save failed:", err);
+            alert("Save failed, check console.");
         });
 }

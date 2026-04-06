@@ -14,6 +14,10 @@
 
     <h2>Home Insurance Form</h2>
 
+    <!-- 🔹 Policy ID Display -->
+    <h3>Policy Number</h3>
+    <input type="text" id="policyNo" placeholder="Auto Generated" readonly>
+
     <h3>Personal Details</h3>
     <input type="text" id="fullName" placeholder="Full Name">
     <input type="text" id="nic" placeholder="NIC">
@@ -41,11 +45,10 @@
         <option value="">Select Plan</option>
         <option>Basic</option>
         <option>Standard</option>
-        <option>Premium</option>
+
     </select>
 
-    <button onclick="saveHomePolicy()">Submit</button>
-
+    <button type="button" onclick="saveHomePolicy()">Submit</button>
 </div>
 
 <script src="../js/home.js"></script>

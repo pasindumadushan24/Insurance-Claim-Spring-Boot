@@ -1,0 +1,93 @@
+/* Body & general styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin: 0;
+}
+
+/* Back button */
+nav {
+    margin-bottom: 20px;
+}
+
+.back-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+}
+
+.back-link:hover {
+    background-color: #555;
+}
+
+/* Page title */
+h2 {
+    color: #f39c12;
+    margin-bottom: 20px;
+}
+
+/* Card container */
+.table-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #fef5e7;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    overflow-x: auto; /* horizontal scroll on small screens */
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px; /* ensures table doesn't shrink too much */
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    white-space: nowrap; /* prevents text wrapping */
+}
+
+th {
+    background-color: #fef5e7;
+    color: #f39c12;
+    font-weight: 700;
+    border-bottom: 2px solid #f39c12;
+}
+
+td {
+    color: #555;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #fef5e7;
+}
+
+tr:hover {
+    background-color: #fffdf9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .table-card {
+        padding: 20px;
+    }
+    table {
+        min-width: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    table {
+        min-width: 500px;
+    }
+    th, td {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+}

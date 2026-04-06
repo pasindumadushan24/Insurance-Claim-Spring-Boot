@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class HomePolicyDTO {
 
+    private Integer id; // numeric database ID, buttons use karanna
+    private String policyCode;
     private String fullName;
     private String nic;
     private String email;
@@ -21,4 +23,6 @@ public class HomePolicyDTO {
     private double monthlyPremium;
     private String policyStart;
     private String plan;
+
+    private String status;
 }

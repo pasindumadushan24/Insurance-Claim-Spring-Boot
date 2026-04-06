@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vehicle Full Insurance</title>
+    <link rel="stylesheet" href="../css/M-main2.css">
+</head>
+<body>
+
+<a href="../pages/dashboard.html" class="back-circle-btn">←</a>
+
+<div class="container">
+    <div class="left">
+
+        <div class="steps">
+            <span class="active">Vehicle Details</span>
+            <span>Plans</span>
+            <span>Summary</span>
+            <span>Confirm</span>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step-content active" id="step1">
+            <h2>Vehicle Details</h2>
+
+            <label>Vehicle Type</label>
+            <select id="vehicleType">
+                <option>Car</option>
+                <option>Bike</option>
+                <option>Van</option>
+            </select>
+
+            <label>Vehicle Make</label>
+            <select id="vehicleMake">
+                <option>Toyota</option>
+                <option>Honda</option>
+                <option>Nissan</option>
+            </select>
+
+            <label>Vehicle Model</label>
+            <select id="vehicleModel">
+                <option>Car</option>
+                <option>SUV</option>
+                <option>Truck</option>
+            </select>
+
+            <label>Fuel Type</label>
+            <select id="fuelType">
+                <option>Petrol</option>
+                <option>Diesel</option>
+                <option>Electric</option>
+            </select>
+
+            <label>Purpose</label>
+            <input type="radio" name="purpose" value="Private" checked> Private
+            <input type="radio" name="purpose" value="Hiring"> Hiring
+
+            <button id="nextBtn1">Next →</button>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-content" id="step2">
+            <h2>Plans</h2>
+            <select id="plans">
+                <option>Basic Plan</option>
+                <option>Premium Plan</option>
+            </select>
+
+            <button id="prevBtn2">← Back</button>
+            <button id="nextBtn2">Next →</button>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-content" id="step3">
+            <h2>Summary</h2>
+            <div id="summary"></div>
+
+            <button id="prevBtn3">← Back</button>
+            <button id="nextBtn3">Next →</button>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step-content" id="step4">
+            <h2>Confirm</h2>
+
+            <p>Total: Rs. 1400/=</p>
+
+            <button id="prevBtn4">← Back</button>
+            <button id="nextBtn5">Buy →</button>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="step-content" id="step5">
+            <h2>Policy Details</h2>
+
+            <label>NIC</label>
+            <input type="text" id="nicNumber">
+
+            <label>Title</label>
+            <select id="title">
+                <option>Mr.</option>
+                <option>Mrs.</option>
+            </select>
+
+            <label>Full Name</label>
+            <input type="text" id="fullName">
+
+            <label>Email</label>
+            <input type="email" id="email">
+
+            <label>Mobile</label>
+            <input type="text" id="mobileNumber">
+
+            <label>Address 1</label>
+            <input type="text" id="address1">
+
+            <label>Address 2</label>
+            <input type="text" id="address2">
+
+            <label>Holder Type</label>
+            <input type="radio" name="holderType" value="Individual" checked> Individual
+            <input type="radio" name="holderType" value="Business"> Business
+
+
+
+            <label>Reg Number</label>
+            <input type="text" id="regNumber">
+
+            <label>Engine Capacity</label>
+            <input type="text" id="engineCapacity">
+
+            <label>Chassis</label>
+            <input type="text" id="chassisNumber">
+
+            <label>Year</label>
+            <input type="number" id="manufactureYear">
+
+            <label>Policy Start</label>
+            <input type="date" id="policyStart">
+
+            <button id="prevBtn5">← Back</button>
+            <button onclick="savePolicy()">Pay Now →</button>
+        </div>
+
+    </div>
+
+    <div class="right">
+        <img id="stepImage" src="https://images.unsplash.com/photo-1549921296-3a6b8f8c0b9d"> </div>
+</div>
+
+<script src="../js/Full.js"></script>
+
+</body>
+</html>

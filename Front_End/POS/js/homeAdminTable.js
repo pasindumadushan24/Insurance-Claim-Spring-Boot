@@ -15,7 +15,7 @@ function load() {
                 const tr = document.createElement("tr");
 
                 tr.innerHTML = `
-                    <td>${p.id}</td>
+                    <td>${p.policyCode}</td>
                     <td>${p.fullName}</td>
                     <td>${p.houseType}</td>
                     <td>${p.houseValue}</td>
@@ -26,11 +26,10 @@ function load() {
                         ${
                     status === "PENDING"
                         ? `
-                        <button onclick="approve(${p.id})">Approve</button>
-                        <button onclick="reject(${p.id})">Reject</button>
-                        <button onclick="pay(${p.id})">Pay</button>
-                        `
-                        : "Done"
+                <button class="action-btn approve-btn" onclick="approve(${p.id})">Approve</button>
+                <button class="action-btn reject-btn" onclick="reject(${p.id})">Reject</button>
+              `
+                        : `<span class="done-text">Done</span>`
                 }
                     </td>
                 `;
@@ -50,7 +49,7 @@ function reject(id) {
         .then(load);
 }
 
-function pay(id) {
-    fetch(`http://localhost:8080/api/home-policy/pay/${id}`, { method: "PUT" })
-        .then(load);
-}
+// function pay(id) {
+//     fetch(`http://localhost:8080/api/home-policy/pay/${id}`, { method: "PUT" })
+//         .then(load);
+// }

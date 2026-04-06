@@ -65,13 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     localStorage.setItem("jwtToken", token);
                     localStorage.setItem("userRole", role);
 
-                    // ✅ redirect
+
                     if (role === "USER") {
                         window.location.href = "../pages/dashboard2.html";
                     } else if (role === "ADMIN") {
                         window.location.href = "../pages/dashboard.html";
                     } else if (role === "OWNER") {
-                        window.location.href = "../pages/dashboard2.html";
+                        window.location.href = "../pages/dashboard.html";
                     }
 
                 } else {

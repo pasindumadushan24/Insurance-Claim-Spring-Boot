@@ -73,6 +73,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/policy/**").permitAll()
                         .requestMatchers("/api/life-policy/**").permitAll()
                         .requestMatchers("/api/home-policy/**").permitAll()
+                        .requestMatchers("/api/vehicle-full/**").permitAll()
+
+
+
+
 
                         .anyRequest().authenticated()
                 )

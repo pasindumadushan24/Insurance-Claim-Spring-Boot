@@ -35,10 +35,23 @@ function populateTable(policies) {
             <td>${policy.manufactureYear}</td>
             <td>${policy.policyStart}</td>
             <td>${policy.plan}</td>
-             <td>
-                <button class="action-btn approve-btn" onclick="approvePolicy(${policy.id})">Approve</button>
-                <button class="action-btn reject-btn" onclick="rejectPolicy(${policy.id})">Reject</button>
-                <button class="action-btn approve-btn" onclick="payPolicy(${policy.id})">Pay Now</button>
+
+            <!-- ✅ STATUS COLUMN -->
+            <td>
+                <span class="status-badge ${(policy.status || 'PENDING').toLowerCase()}">
+                    ${policy.status || 'PENDING'}
+                </span>
+            </td>
+
+            <!-- ✅ ACTION COLUMN -->
+            <td>
+                ${(!policy.status || policy.status === "PENDING") ? `
+                    <button class="action-btn approve-btn" onclick="approvePolicy(${policy.id})">Approve</button>
+                    <button class="action-btn reject-btn" onclick="rejectPolicy(${policy.id})">Reject</button>
+                ` : `
+                    <span class="done-text">✔ Done</span>
+                `}
+                <button class="action-btn pay-btn" onclick="payPolicy(${policy.id})">Pay Now</button>
             </td>
         `;
 
@@ -58,13 +71,24 @@ function payPolicy(id){
         })
         .catch(err => console.error("Error paying policy:", err));
 }
-
 function approvePolicy(id) {
-    alert("Approve policy ID: " + id);
-
+    fetch(`http://localhost:8080/api/policy/${id}/approve`, {
+        method: "PUT"
+    })
+        .then(() => {
+            alert("Approved!");
+            loadPolicies(); // refresh table
+        })
+        .catch(err => console.error("Error approving:", err));
 }
 
 function rejectPolicy(id) {
-    alert("Reject policy ID: " + id);
-
+    fetch(`http://localhost:8080/api/policy/${id}/reject`, {
+        method: "PUT"
+    })
+        .then(() => {
+            alert("Rejected!");
+            loadPolicies();
+        })
+        .catch(err => console.error("Error rejecting:", err));
 }

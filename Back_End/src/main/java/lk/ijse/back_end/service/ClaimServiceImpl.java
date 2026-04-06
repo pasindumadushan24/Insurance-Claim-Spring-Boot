@@ -55,11 +55,12 @@ public class ClaimServiceImpl implements ClaimService {
     }
 
     @Override
-    public void updateStatus(String claimId, String status) {
+    public ClaimDTO updateStatus(String claimId, String status) {
         Claim claim = claimRepository.findById(claimId)
                 .orElseThrow(() -> new RuntimeException("Claim not found"));
-        claim.setPaymentStatus(status);
+        claim.setStatus(status); // ✅ update status
         claimRepository.save(claim);
+        return mapper.map(claim, ClaimDTO.class);
     }
 
     @Override

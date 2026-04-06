@@ -1,4 +1,13 @@
-function saveLifePolicy(){
+// Load next policy number
+window.addEventListener('DOMContentLoaded', () => {
+    fetch('http://localhost:8080/api/life-policy/next-policy-code')
+        .then(res => res.text())
+        .then(code => {
+            document.getElementById('policyNo').value = code;
+        });
+});
+
+function saveLifePolicy() {
 
     const data = {
         fullName: document.getElementById("fullName").value,
@@ -22,21 +31,24 @@ function saveLifePolicy(){
     };
 
     fetch("http://localhost:8080/api/life-policy/save", {
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data)
     })
-        .then(res => res.json())
-        .then(res => {
-            alert("Life Policy Saved Successfully ✅");
+        .then(res => res.text())
+        .then(code => {
+            document.getElementById("policyNo").value = code;
+            alert("Saved ✅ Policy No: " + code);
 
-            // 👉 redirect
-            window.location.href = "payment.html";
+            // Optional: redirect
+            setTimeout(() => {
+                window.location.href = "payment.html";
+            }, 1000);
         })
         .catch(err => {
-            console.error(err);
-            alert("Error saving policy ❌");
+            console.error("Save failed:", err);
+            alert("Save failed, check console.");
         });
 }
+
+

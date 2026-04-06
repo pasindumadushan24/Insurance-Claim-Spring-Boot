@@ -18,7 +18,7 @@ public class Claim {
     private String mobile;
     private String email;
     private String message;
-
+    private String status; // PENDING, APPROVED, REJECTED
 
 
 

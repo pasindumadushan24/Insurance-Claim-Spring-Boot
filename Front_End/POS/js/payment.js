@@ -92,6 +92,10 @@ async function payCash() {
 }
 
 
+const policyId = localStorage.getItem("policyId");
+console.log("Policy ID:", policyId);
+
+
 
 // Switch Tabs
 function showTab(tab) {

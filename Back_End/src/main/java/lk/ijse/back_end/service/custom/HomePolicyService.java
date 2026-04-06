@@ -7,9 +7,13 @@ import java.util.List;
 
 public interface HomePolicyService {
 
-    HomePolicy save(HomePolicyDTO dto);
+    // Return formatted Policy code
+    String save(HomePolicyDTO dto);
 
     void updateStatus(Integer id, String status);
 
     List<HomePolicy> getAll();
+    Integer getLastPolicyId();
+
+    List<HomePolicyDTO> getAllPolicies();
 }

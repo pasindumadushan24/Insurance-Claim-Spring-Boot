@@ -2,78 +2,225 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vehicle Insurance</title>
-    <link rel="stylesheet" href="../css/vehical.css">
-</head>
+    <title>Vehicle Insurance Chat</title>
+    <style>
+        /* --- Reset --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
 
+        body {
+            background: linear-gradient(135deg, #f39c12, #ff6a00);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* --- Container --- */
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 60px 30px 30px 30px; /* top padding 60px කළා */
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            position: relative;
+            animation: fadeIn 0.8s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: white;
+            color: #f39c12;
+            border: 2px solid #f39c12;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            z-index: 10; /* added */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: white;
+            color: #f39c12;
+            border: 2px solid #f39c12;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #f39c12;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        h1 span { color: #f39c12; }
+
+        /* --- Chat Box --- */
+        .chat-box {
+            background: #f7f7f7;
+            border-radius: 15px;
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 350px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .chat-message {
+            background: #f39c12;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            align-self: flex-start;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .chat-message.user {
+            background: #ff6a00;
+            align-self: flex-end;
+        }
+
+        /* --- Input Area --- */
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 12px;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            outline: none;
+        }
+
+        .input-area button {
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            background: linear-gradient(135deg, #f39c12, #ff6a00);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .input-area button:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 500px) {
+            .main-container { padding: 20px; }
+        }
+    </style>
+</head>
 <body>
 
 <div class="main-container">
 
-    <!-- Back Button -->
     <a href="../pages/vehicalInsurance.html" class="back-btn">← Back</a>
 
     <h1>VEHICLE <span>INSURANCE</span></h1>
 
-    <div class="info-section">
-        <p>
-            Protect your vehicle with our comprehensive insurance plans.
-            We cover accidents, damages, and theft.
-        </p>
+    <div class="chat-box" id="chatBox">
+        <div class="chat-message">Hello! Let's get your quote. What's your name?</div>
     </div>
 
-    <!-- Image -->
-    <div class="gallery">
-        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8">
-    </div>
-
-    <!-- FORM -->
-    <div class="info-section">
-        <h3>Request a Quote</h3>
-
-        <form id="quoteForm">
-            <input type="text" placeholder="Enter your name" id="name" required>
-            <input type="text" placeholder="Enter your contact number" id="mobile" required>
-            <input type="email" placeholder="Enter your email address" id="email" required>
-
-            <label class="check">
-                <input type="checkbox" required>
-                I agree to Privacy Policy
-            </label>
-
-            <button type="submit">Get a Quote</button>
-        </form>
-
-        <p id="msg"></p>
-    </div>
+    <form id="chatForm" class="input-area">
+        <input type="text" id="chatInput" placeholder="Type here..." required>
+        <button type="submit">Send</button>
+    </form>
 
 </div>
 
 <script>
-    document.getElementById("quoteForm").addEventListener("submit", function(e){
+    const chatBox = document.getElementById("chatBox");
+    const chatInput = document.getElementById("chatInput");
+    const chatForm = document.getElementById("chatForm");
+
+    let step = 0;
+    const formData = {};
+
+    chatForm.addEventListener("submit", function(e) {
         e.preventDefault();
+        const value = chatInput.value.trim();
+        if (!value) return;
 
-        const data = {
-            name: document.getElementById("name").value,
-            mobile: document.getElementById("mobile").value,
-            email: document.getElementById("email").value
-        };
+        // Show user message
+        const userMsg = document.createElement("div");
+        userMsg.classList.add("chat-message", "user");
+        userMsg.textContent = value;
+        chatBox.appendChild(userMsg);
 
-        fetch("http://localhost:8080/api/quote", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-            .then(res => res.text())
-            .then(res => {
-                document.getElementById("msg").innerText = "✅ Request Sent Successfully!";
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        chatInput.value = "";
+
+        // Step-based questions
+        if (step === 0) {
+            formData.name = value;
+            addBotMessage("Great! Now enter your contact number:");
+            step++;
+        } else if (step === 1) {
+            formData.mobile = value;
+            addBotMessage("Got it! Please enter your email address:");
+            step++;
+        } else if (step === 2) {
+            formData.email = value;
+            addBotMessage("Thanks! Sending your request...");
+
+            // Send to backend
+            fetch("http://localhost:8080/api/quote", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
             })
-            .catch(err => {
-                document.getElementById("msg").innerText = "❌ Error sending request!";
-            });
+                .then(res => res.text())
+                .then(res => addBotMessage("✅ Request Sent Successfully!"))
+                .catch(err => addBotMessage("❌ Error sending request!"));
+
+            step++;
+        }
     });
+
+    function addBotMessage(text) {
+        const botMsg = document.createElement("div");
+        botMsg.classList.add("chat-message");
+        botMsg.textContent = text;
+        chatBox.appendChild(botMsg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
 </script>
 
 </body>

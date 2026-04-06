@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
-@Entity
+import java.time.LocalDate;@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,6 +35,5 @@ public class LifePolicy {
     private LocalDate policyStart;
     private String plan;
 
-    public void setStatus(String status) {
-    }
+    private String status;
 }

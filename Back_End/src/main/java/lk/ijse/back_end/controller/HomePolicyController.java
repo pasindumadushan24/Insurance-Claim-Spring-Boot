@@ -15,19 +15,27 @@ public class HomePolicyController {
     private final HomePolicyService service;
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody HomePolicyDTO dto) {
-        return ResponseEntity.ok(service.save(dto));
+    public ResponseEntity<String> save(@RequestBody HomePolicyDTO dto) {
+        String policyCode = service.save(dto);
+        return ResponseEntity.ok(policyCode); // Return POLH001, POLH002...
     }
 
     @GetMapping("/all")
     public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(service.getAll());
+        return ResponseEntity.ok(service.getAllPolicies());
     }
-
     @PutMapping("/approve/{id}")
     public ResponseEntity<String> approve(@PathVariable Integer id) {
         service.updateStatus(id, "APPROVED");
         return ResponseEntity.ok("Approved");
+    }
+
+    @GetMapping("/next-policy-code")
+    public ResponseEntity<String> getNextPolicyCode() {
+        Integer lastId = service.getLastPolicyId();
+        int nextId = (lastId == null) ? 1 : lastId + 1;
+        String nextCode = String.format("POLH%03d", nextId);
+        return ResponseEntity.ok(nextCode);
     }
 
     @PutMapping("/reject/{id}")
